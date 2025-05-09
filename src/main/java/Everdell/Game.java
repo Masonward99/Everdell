@@ -3,7 +3,11 @@ package Everdell;
 import Everdell.BasicLocation.*;
 import Everdell.Cards.Card;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
     private final Deck deck;
@@ -51,5 +55,30 @@ public class Game {
         basicLocations[5] = new Stone();
         basicLocations[6] = new BerryAndCard();
         basicLocations[7] = new BerryAndCard();
+    }
+    public void gainAnyResource ( int numGained, Player player) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < numGained; i++) {
+            Resource resource = getResourceFromUser(scanner);
+            player.gainResource(resource, 1);
+        }
+    }
+    public Resource getResourceFromUser (Scanner scanner) {
+        Resource[] resources = new Resource[]{Resource.BERRIES, Resource.RESIN, Resource.STONES, Resource.TWIGS} ;
+            System.out.println("Select a resource to gain:");
+            for (int j = 0 ; j < resources.length ;j++) {
+                System.out.println(j  + ": " +  resources[j].toString() );
+            }
+            int index = getIntInRange(resources.length, scanner);
+            return resources[index];
+    }
+
+    private int getIntInRange ( int max, Scanner scanner ) {
+        int index = scanner.nextInt();
+        while ( index >= max){
+            System.out.println("Enter a number between 0 and " + max);
+            index = scanner.nextInt();
+        }
+        return index;
     }
 }
