@@ -1,9 +1,14 @@
 package Everdell;
 
+import Everdell.Cards.AbilityCard;
+import Everdell.Cards.BlueGovernance.Courthouse;
+import Everdell.Cards.BlueGovernance.Historian;
 import Everdell.Cards.BlueGovernance.Shopkeeper;
 import Everdell.Cards.Card;
+import Everdell.Cards.Construction;
 import Everdell.Cards.Critter;
 import Everdell.Cards.Production.Farm;
+import Everdell.Cards.TanTraveller.Wanderer;
 import Everdell.Events.Event;
 
 
@@ -83,7 +88,8 @@ public class Player {
         return workers;
     }
 
-
+    public ArrayList<Event> getCompletedEvents() {return completedEvents;}
+    public void addEvent(Event event){completedEvents.add(event);}
     public int getHandSize(){
         return hand.size();
     }
@@ -130,9 +136,32 @@ public class Player {
     public void playCritter (Critter critter, Game game){
         Shopkeeper shopkeeper = new Shopkeeper();
         boolean hasShopkeeper = isCardOnBoard(shopkeeper);
-
-        if(hasShopkeeper){
-            shopkeeper.ability(this, game);
-        }
+        // Activate ability if tan traveller or production
+        if (critter instanceof AbilityCard)  ((AbilityCard) critter).action(this, game);
+        //Add Critter to correct list
+        if (critter instanceof Wanderer)  addNonBoardCard((Wanderer) critter);
+        else addCardToBoard((Card) critter);
+        //activate shopkeeper
+        if(hasShopkeeper) shopkeeper.ability(this, game);
+    }
+    public void playConstruction (Construction construction, Game game){
+        Courthouse courthouse = new Courthouse();
+        boolean hasCourthouse = isCardOnBoard(courthouse);
+        //Activate ability for ability cards
+        if(construction instanceof AbilityCard)  ((AbilityCard) construction).action(this, game);
+        // add card to board
+        addCardToBoard((Card) construction);
+        //activate courthouse
+        if(hasCourthouse) courthouse.ability(this, game);
+    }
+    public void playCard (Card card, Game game){
+        Historian historian = new Historian();
+        boolean hasHistorian = isCardOnBoard(historian);
+        if(card instanceof Critter) playCritter((Critter) card, game);
+        else if(card instanceof Construction) playConstruction((Construction) card, game);
+        if(hasHistorian) historian.ability(this, game);
+    }
+    public void spendResources (TreeMap<Resource, Integer> resources){
+        for (Resource resource : resources.keySet()) this.resources.put(resource, this.resources.get(resource) - resources.get(resource));
     }
 }

@@ -1,6 +1,7 @@
 import Everdell.BasicLocation.BasicLocation;
 import Everdell.BasicLocation.Location;
 import Everdell.BasicLocation.OneBerry;
+import Everdell.ForestLocations.ForestLocation;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -39,12 +40,13 @@ public class TestGame {
         String input = "0\n1\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
-        assertEquals(0, (int) player.getResources().get(Resource.RESIN));
+        game = new Game(0);
+        assertEquals(0, (int) player.getResources().get(Resource.TWIGS));
+        assertEquals(0, (int) player.getResources().get(Resource.STONES));
 
         game.gainAnyResource(2, player);
-        assertEquals(1,(int) player.getResources().get(Resource.BERRIES));
-        assertEquals(1,(int) player.getResources().get(Resource.RESIN));
+        assertEquals(1,(int) player.getResources().get(Resource.TWIGS));
+        assertEquals(1,(int) player.getResources().get(Resource.STONES));
     }
 
     @Test
@@ -52,8 +54,24 @@ public class TestGame {
         String input = "5\n3\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        game = new Game(0);
         assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
         game.gainAnyResource(1, player);
-        assertEquals(1,(int) player.getResources().get(Resource.TWIGS));
+        assertEquals(1,(int) player.getResources().get(Resource.BERRIES));
+    }
+    @Test
+    public void testSetUpForest(){
+        ForestLocation[] forestLocations = game.getForestLocations();
+        assert(forestLocations.length == 4);
+        System.out.println(forestLocations[0]);
+        assert(forestLocations[0] != forestLocations[1]);
+        assert(forestLocations[0] != forestLocations[2]);
+        assert(forestLocations[0] != forestLocations[3]);
+        assert(forestLocations[3] != null);
+
+        game = new Game(2);
+        forestLocations = game.getForestLocations();
+        assert(forestLocations.length == 4);
+        assert(forestLocations[3] == null);
     }
 }

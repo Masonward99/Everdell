@@ -2,15 +2,21 @@ package Everdell;
 
 import Everdell.BasicLocation.*;
 import Everdell.Cards.Card;
+import Everdell.Events.BasicEvents.*;
+import Everdell.Events.Event;
+import Everdell.ForestLocations.*;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Random;
 
 public class Game {
     private final Deck deck;
     private final Player[] players;
     private final ArrayList<Card> discard;
     private final BasicLocation[] basicLocations;
+    private final ForestLocation[] forestLocations;
+    private final ArrayList<Event> basicEvents;
+    private final InputReader input;
     public Game(int numPlayers) {
         deck = new Deck();
         players = new Player[numPlayers];
@@ -18,6 +24,12 @@ public class Game {
         deck.populateDeck();
         basicLocations = new BasicLocation[8];
         setUpBasicLocations();
+        forestLocations = new ForestLocation[4];
+        setUpForestLocations(numPlayers);
+        basicEvents = new ArrayList<>();
+        setUpBasicEvents();
+        input = new InputReader();
+
     }
     public void refillDeck (){
         deck.addCards(discard);
@@ -53,29 +65,43 @@ public class Game {
         basicLocations[6] = new BerryAndCard();
         basicLocations[7] = new BerryAndCard();
     }
+    private void setUpForestLocations(int numPlayers) {
+        ArrayList<ForestLocation> forestLocations = new ArrayList<>();
+        Random rand = new Random();
+        forestLocations.add(new ForestThreeBerries(numPlayers));
+        forestLocations.add(new ThreeCardsAndStone(numPlayers));
+        forestLocations.add(new TwoCardsAndAny(numPlayers));
+        forestLocations.add(new TwoAny(numPlayers));
+        forestLocations.add(new TwoBerriesAndCard(numPlayers));
+        forestLocations.add(new TwigResinAndBerry(numPlayers));
+        forestLocations.add(new TwoResinAndTwig(numPlayers));
+        for(int i =0; i< (numPlayers == 2? 3 : 4); i++){
+            ForestLocation forestLocation = forestLocations.get(rand.nextInt(forestLocations.size()));
+            this.forestLocations[i] = forestLocation;
+            forestLocations.remove(forestLocation);
+        }
+    }
+    private void setUpBasicEvents() {
+        basicEvents.add(new CityMonument());
+        basicEvents.add(new GrandTour());
+        basicEvents.add(new HarvestFestival());
+        basicEvents.add(new CartographersExpedition());
+    }
     public void gainAnyResource ( int numGained, Player player) {
-        Scanner scanner = new Scanner(System.in);
+        Resource[] resources = new Resource[]{Resource.TWIGS, Resource.STONES, Resource.RESIN, Resource.BERRIES};
         for (int i = 0; i < numGained; i++) {
-            Resource resource = getResourceFromUser(scanner);
+            Resource resource = getResourceFromUser( resources);
             player.gainResource(resource, 1);
         }
     }
-    public Resource getResourceFromUser (Scanner scanner) {
-        Resource[] resources = new Resource[]{Resource.BERRIES, Resource.RESIN, Resource.STONES, Resource.TWIGS} ;
-            System.out.println("Select a resource to gain:");
-            for (int j = 0 ; j < resources.length ;j++) {
-                System.out.println(j  + ": " +  resources[j].toString() );
-            }
-            int index = getIntInRange(resources.length, scanner);
-            return resources[index];
-    }
-
-    private int getIntInRange ( int max, Scanner scanner ) {
-        int index = scanner.nextInt();
-        while ( index >= max){
-            System.out.println("Enter a number between 0 and " + max);
-            index = scanner.nextInt();
+    public Resource getResourceFromUser ( Resource[] resources) {
+        System.out.println("Select a resource to gain:");
+        for (int j = 0 ; j < resources.length ;j++) {
+            System.out.println(j  + ": " +  resources[j].toString() );
         }
-        return index;
+        int index = input.getIntInRange(resources.length);
+        return resources[index];
     }
+    public BasicLocation[] getBasicLocations() {return basicLocations;}
+    public ForestLocation[] getForestLocations() {return forestLocations;}
 }

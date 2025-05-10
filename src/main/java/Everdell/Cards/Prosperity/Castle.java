@@ -2,10 +2,10 @@ package Everdell.Cards.Prosperity;
 
 import Everdell.Cards.Card;
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
 import Everdell.Player;
 import Everdell.Resource;
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Castle extends Construction implements Prosperity {
@@ -26,5 +26,10 @@ public class Castle extends Construction implements Prosperity {
             }
         }
         return bonusPoints;
+    }
+
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof King && !isOccupied();
     }
 }

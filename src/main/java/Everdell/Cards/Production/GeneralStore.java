@@ -1,6 +1,8 @@
 package Everdell.Cards.Production;
 
+import Everdell.Cards.BlueGovernance.Shopkeeper;
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -17,5 +19,10 @@ public class GeneralStore extends Construction implements Production {
     public void action (Player player, Game game) {
         boolean hasFarm = player.countFarms() > 0;
         player.gainResource(Resource.BERRIES, hasFarm? 2: 1);
+    }
+
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof Shopkeeper && !isOccupied();
     }
 }
