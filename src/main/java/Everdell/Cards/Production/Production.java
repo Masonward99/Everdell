@@ -1,4 +1,4 @@
-package Everdell.Cards;
+package Everdell.Cards.Production;
 
 import Everdell.Game;
 import Everdell.Player;

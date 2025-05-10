@@ -3,9 +3,6 @@ package Everdell;
 import Everdell.BasicLocation.*;
 import Everdell.Cards.Card;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +41,7 @@ public class Game {
         Worker worker = player.nextAvailableWorker();
         location.visit(worker, this);
         worker.placeWorker(location);
-        location.getWorkers().add(worker);
+        location.addWorker(worker);
     }
     private void setUpBasicLocations() {
         basicLocations[0] = new ThreeTwigs();

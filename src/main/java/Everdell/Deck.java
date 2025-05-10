@@ -1,7 +1,7 @@
 package Everdell;
 
 import Everdell.Cards.Card;
-import Everdell.Cards.Farm;
+import Everdell.Cards.Production.Farm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +26,9 @@ public class Deck {
     }
     public void populateDeck() {
         for (int i = 0; i < 8; i++) {
+            deck.add(new Farm());
+        }
+        for (int i = 0; i < 3; i++) {
             deck.add(new Farm());
         }
     }

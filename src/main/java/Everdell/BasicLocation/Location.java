@@ -12,5 +12,5 @@ public interface Location {
     public abstract boolean canVisit(Worker worker);
     public abstract void visit (Worker worker, Game game);
     public abstract void returnWorker(Worker worker);
-    public abstract ArrayList<Worker> getWorkers();
+    public abstract void addWorker(Worker worker);
 }

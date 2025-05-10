@@ -1,6 +1,6 @@
 import Everdell.Deck;
 import Everdell.Cards.Card;
-import Everdell.Cards.Farm;
+import Everdell.Cards.Production.Farm;
 import org.junit.Before;
 import org.junit.Test;
 

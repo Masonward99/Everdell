@@ -11,6 +11,9 @@ public abstract class BasicLocation implements Location {
         this.name = name;
         workers = new ArrayList <>();
     }
+    public void addWorker(Worker worker) {
+        workers.add(worker);
+    }
     public ArrayList <Worker> getWorkers() {
         return workers;
     }
@@ -20,4 +23,5 @@ public abstract class BasicLocation implements Location {
     public void returnWorker(Worker worker) {
         getWorkers().remove(worker);
     }
+
 }

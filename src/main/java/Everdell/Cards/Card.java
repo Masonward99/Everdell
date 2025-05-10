@@ -10,11 +10,13 @@ public abstract class Card {
     private final String ability;
     private final TreeMap<Resource, Integer> costs;
     private final boolean isUnique;
-    public Card(String name, String ability,boolean isUnique) {
+    private final int points;
+    public Card(String name, String ability,boolean isUnique, int points) {
         this.name = name;
         this.ability = ability;
         costs = new TreeMap<>();
         this.isUnique = isUnique;
+        this.points = points;
     }
     public String getName() {
         return name;
@@ -28,6 +30,13 @@ public abstract class Card {
     }
     public boolean isUnique() {
         return isUnique;
+    }
+    public boolean testUniqueConstraint(Player player) {
+        // will always be true if Card is not constrained unique
+        return !isUnique;
+    }
+    public int getPoints() {
+        return points;
     }
 
 }

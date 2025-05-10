@@ -44,5 +44,8 @@ public abstract class ForestLocation implements Location {
     public String getName() {
         return name;
     }
+    public void addWorker(Worker worker) {
+        workers.add(worker);
+    }
 
 }

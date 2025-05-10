@@ -1,7 +1,7 @@
 package Everdell;
 
-import Everdell.BasicLocation.Location;
 import Everdell.Cards.Card;
+import Everdell.Cards.Production.Farm;
 import Everdell.Events.Event;
 
 
@@ -14,6 +14,7 @@ public class Player {
     private final String name;
     private final ArrayList<Card> hand;
     private final ArrayList<Card> board;
+    private final ArrayList<Card> playedNonBoardCards;
     private final ArrayList<Event> completedEvents;
     public static final int HAND_LIMIT = 8;
     private final ArrayList<Worker> workers;
@@ -34,6 +35,7 @@ public class Player {
         workers.add(new Worker(this));
         workers.add(new Worker(this));
         season = Season.WINTER;
+        playedNonBoardCards = new ArrayList<>();
     }
     public String getName() {
         return name;
@@ -93,5 +95,26 @@ public class Player {
     }
     public void addCard(Card card){
         hand.add(card);
+    }
+    public int countFarms (){
+        int count = 0;
+        for (Card card : board) {
+            if (card instanceof Farm) {
+                count++;
+            }
+        }
+        return count;
+    }
+    public void addCardToBoard (Card card){
+        board.add(card);
+    }
+    public ArrayList<Card> getBoard(){
+        return board;
+    }
+    public ArrayList<Card> getPlayedNonBoardCards(){
+        return playedNonBoardCards;
+    }
+    public void addNonBoardCard (Card card){
+        playedNonBoardCards.add(card);
     }
 }
