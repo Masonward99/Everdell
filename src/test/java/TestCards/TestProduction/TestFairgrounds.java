@@ -27,8 +27,8 @@ public class TestFairgrounds {
 
     @Test
     public void testFairgroundsUnique() {
-        assertTrue(fairgrounds.testUniqueConstraint(player));
+        assertTrue(fairgrounds.isPlayable(player));
         player.addCardToBoard(new Fairgrounds());
-        assertFalse(fairgrounds.testUniqueConstraint(player));
+        assertFalse(fairgrounds.isPlayable(player));
     }
 }

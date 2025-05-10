@@ -1,6 +1,8 @@
 package Everdell;
 
+import Everdell.Cards.BlueGovernance.Shopkeeper;
 import Everdell.Cards.Card;
+import Everdell.Cards.Critter;
 import Everdell.Cards.Production.Farm;
 import Everdell.Events.Event;
 
@@ -116,5 +118,21 @@ public class Player {
     }
     public void addNonBoardCard (Card card){
         playedNonBoardCards.add(card);
+    }
+    public boolean isCardOnBoard (Card card){
+        for (Card playedCard : board) {
+            if (card.getName().equals(playedCard.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void playCritter (Critter critter, Game game){
+        Shopkeeper shopkeeper = new Shopkeeper();
+        boolean hasShopkeeper = isCardOnBoard(shopkeeper);
+
+        if(hasShopkeeper){
+            shopkeeper.ability(this, game);
+        }
     }
 }

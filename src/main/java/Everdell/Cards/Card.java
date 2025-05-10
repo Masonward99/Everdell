@@ -31,9 +31,8 @@ public abstract class Card {
     public boolean isUnique() {
         return isUnique;
     }
-    public boolean testUniqueConstraint(Player player) {
-        // will always be true if Card is not constrained unique
-        return !isUnique;
+    public boolean isPlayable(Player player) {
+        return !isUnique || !player.isCardOnBoard(this);
     }
     public int getPoints() {
         return points;

@@ -23,14 +23,4 @@ public class Fairgrounds extends Construction implements Production {
         game.drawCards(2, player);
     }
 
-    @Override
-    public boolean testUniqueConstraint(Player player) {
-        ArrayList<Card> board = player.getBoard();
-        for (Card card : board) {
-            if (card instanceof Fairgrounds) {
-                return false;
-            }
-        }
-        return true ;
-    }
 }
