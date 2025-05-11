@@ -5,6 +5,7 @@ import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Courthouse extends Construction implements BlueGovernance {
@@ -18,8 +19,12 @@ public class Courthouse extends Construction implements BlueGovernance {
 
     @Override
     public void ability(Player player, Game game) {
-        Resource[] resources = new Resource[]{Resource.TWIGS, Resource.RESIN, Resource.STONES};
-        Resource resource = game.getResourceFromUser( resources);
+        ArrayList<Resource> resources= new ArrayList<>();
+        resources.add(Resource.TWIGS);
+        resources.add(Resource.RESIN);
+        resources.add(Resource.STONES);
+
+        Resource resource = game.getInput().getResourceFromUser(resources);
         player.gainResource(resource, 1);
     }
 }

@@ -1,12 +1,12 @@
 package Everdell.Cards.Production;
 
-import Everdell.Cards.Card;
+
 import Everdell.Cards.Construction;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
 
-import java.util.ArrayList;
+
 import java.util.TreeMap;
 
 public class Fairgrounds extends Construction implements Production {

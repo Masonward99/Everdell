@@ -21,7 +21,8 @@ public class School extends Construction implements Prosperity {
     @Override
     public int bonusPoints(Player player) {
         int bonus = 0;
-        ArrayList<Card> cards = player.getBoard();
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.addAll(player.getBoard());
         cards.addAll(player.getPlayedNonBoardCards());
         for (Card card : cards) {
             if (card instanceof HusbandAndWife) bonus += 2;

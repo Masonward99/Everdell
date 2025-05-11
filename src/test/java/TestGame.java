@@ -46,7 +46,7 @@ public class TestGame {
 
         game.gainAnyResource(2, player);
         assertEquals(1,(int) player.getResources().get(Resource.TWIGS));
-        assertEquals(1,(int) player.getResources().get(Resource.STONES));
+        assertEquals(1,(int) player.getResources().get(Resource.RESIN));
     }
 
     @Test

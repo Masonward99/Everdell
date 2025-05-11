@@ -31,6 +31,7 @@ public class Game {
         input = new InputReader();
 
     }
+    public InputReader getInput() {return input;}
     public void refillDeck (){
         deck.addCards(discard);
         discard.clear();
@@ -75,6 +76,7 @@ public class Game {
         forestLocations.add(new TwoBerriesAndCard(numPlayers));
         forestLocations.add(new TwigResinAndBerry(numPlayers));
         forestLocations.add(new TwoResinAndTwig(numPlayers));
+        forestLocations.add(new BasicLocationAndCard(numPlayers));
         for(int i =0; i< (numPlayers == 2? 3 : 4); i++){
             ForestLocation forestLocation = forestLocations.get(rand.nextInt(forestLocations.size()));
             this.forestLocations[i] = forestLocation;
@@ -88,20 +90,18 @@ public class Game {
         basicEvents.add(new CartographersExpedition());
     }
     public void gainAnyResource ( int numGained, Player player) {
-        Resource[] resources = new Resource[]{Resource.TWIGS, Resource.STONES, Resource.RESIN, Resource.BERRIES};
+        ArrayList<Resource> resources = new ArrayList<>();
+        resources.add(Resource.TWIGS);
+        resources.add(Resource.RESIN);
+        resources.add(Resource.STONES);
+        resources.add(Resource.BERRIES);
         for (int i = 0; i < numGained; i++) {
-            Resource resource = getResourceFromUser( resources);
+            Resource resource = input.getResourceFromUser( resources);
             player.gainResource(resource, 1);
         }
     }
-    public Resource getResourceFromUser ( Resource[] resources) {
-        System.out.println("Select a resource to gain:");
-        for (int j = 0 ; j < resources.length ;j++) {
-            System.out.println(j  + ": " +  resources[j].toString() );
-        }
-        int index = input.getIntInRange(resources.length);
-        return resources[index];
-    }
+
+
     public BasicLocation[] getBasicLocations() {return basicLocations;}
     public ForestLocation[] getForestLocations() {return forestLocations;}
 }

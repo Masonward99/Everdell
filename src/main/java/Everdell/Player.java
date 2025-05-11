@@ -8,6 +8,7 @@ import Everdell.Cards.Card;
 import Everdell.Cards.Construction;
 import Everdell.Cards.Critter;
 import Everdell.Cards.Production.Farm;
+import Everdell.Cards.Production.Production;
 import Everdell.Cards.TanTraveller.Wanderer;
 import Everdell.Events.Event;
 
@@ -178,5 +179,16 @@ public class Player {
         }
         return discount >= 0;
     }
-
+    public ArrayList<Card> getProductions(){
+        ArrayList<Card> productions = new ArrayList<>();
+        for (Card card : board) {
+            if (card instanceof Production) productions.add(card);
+        }
+        return productions;
+    }
+    public void gainResources (TreeMap<Resource, Integer> resources){
+        for (Resource resource : resources.keySet()) {
+            this.resources.put(resource, this.resources.get(resource) + resources.get(resource));
+        }
+    }
 }

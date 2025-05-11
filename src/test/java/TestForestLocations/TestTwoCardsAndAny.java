@@ -33,6 +33,6 @@ public class TestTwoCardsAndAny {
 
         twoCardsAndAny.visit(player.nextAvailableWorker(), game);
         assertEquals(2, player.getHandSize());
-        assertEquals(1, (int)player.getResources().get(Resource.STONES));
+        assertEquals(1, (int)player.getResources().get(Resource.RESIN));
     }
 }

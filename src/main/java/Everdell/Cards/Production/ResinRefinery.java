@@ -1,6 +1,7 @@
 package Everdell.Cards.Production;
 
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -27,4 +28,8 @@ public class ResinRefinery extends Construction implements Production {
         action(player, game);
     }
 
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof ChipSweep && !isOccupied();
+    }
 }
