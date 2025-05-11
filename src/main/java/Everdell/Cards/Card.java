@@ -1,5 +1,6 @@
 package Everdell.Cards;
 
+import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
 
@@ -37,5 +38,8 @@ public abstract class Card {
     public int getPoints() {
         return points;
     }
-
+    public abstract boolean canBePlayedBy(Player player, int discount);
+    public  void playCard(Player player, Game game) {
+        player.addCard(this);
+    }
 }

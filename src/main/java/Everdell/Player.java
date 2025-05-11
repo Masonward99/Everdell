@@ -140,7 +140,7 @@ public class Player {
         if (critter instanceof AbilityCard)  ((AbilityCard) critter).action(this, game);
         //Add Critter to correct list
         if (critter instanceof Wanderer)  addNonBoardCard((Wanderer) critter);
-        else addCardToBoard((Card) critter);
+        else addCardToBoard( critter);
         //activate shopkeeper
         if(hasShopkeeper) shopkeeper.ability(this, game);
     }
@@ -164,4 +164,19 @@ public class Player {
     public void spendResources (TreeMap<Resource, Integer> resources){
         for (Resource resource : resources.keySet()) this.resources.put(resource, this.resources.get(resource) - resources.get(resource));
     }
+
+    public boolean canOccupyBoard(Critter critter){
+        for (Card card : board) {
+            if(card instanceof Construction && ((Construction)card).canBeOccupiedBy(critter)) return true;
+        }
+        return false;
+    }
+    public boolean hasEnoughResources (TreeMap<Resource, Integer> resources, int discount){
+        for (Resource resource : resources.keySet()) {
+            int difference = this.resources.get(resource) - resources.get(resource);
+            if (difference < 0) discount += difference;
+        }
+        return discount >= 0;
+    }
+
 }

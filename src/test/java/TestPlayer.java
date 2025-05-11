@@ -148,4 +148,16 @@ public class TestPlayer {
         assertEquals(2, player.getHandSize());
     }
 
+    @Test
+    public void testHasEnoughResources(){
+        //works with discount
+        assertTrue(player.hasEnoughResources(new Farm().getCosts(), 3));
+        assertFalse(player.hasEnoughResources(new Farm().getCosts(), 2));
+        //works without discount
+        player.gainResource(Resource.TWIGS,2);
+        player.gainResource(Resource.RESIN,1);
+        assertTrue(player.hasEnoughResources(new Farm().getCosts(), 0));
+        assertFalse(player.hasEnoughResources(new Castle().getCosts(), 1));
+    }
+
 }

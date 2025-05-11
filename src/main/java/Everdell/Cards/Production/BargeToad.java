@@ -15,4 +15,10 @@ public class BargeToad extends Critter implements Production {
         int numFarms = player.countFarms();
         player.gainResource(Resource.TWIGS, numFarms * 2);
     }
+
+    @Override
+    public void playCard(Player player, Game game) {
+        super.playCard(player, game);
+        action(player, game);
+    }
 }

@@ -15,4 +15,10 @@ public class Wanderer extends Critter implements TanTraveller {
     public void action(Player player, Game game) {
         game.drawCards(3,player);
     }
+
+    @Override
+    public void playCard(Player player, Game game) {
+        player.addNonBoardCard(this);
+        action(player, game);
+    }
 }
