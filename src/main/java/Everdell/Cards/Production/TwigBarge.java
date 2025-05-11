@@ -24,4 +24,12 @@ public class TwigBarge extends Construction implements Production {
     public boolean canBeOccupiedBy (Critter critter) {
         return critter instanceof BargeToad && !isOccupied();
     }
+
+
+    @Override
+    public void playCard(Player player, Game game) {
+        super.playCard(player, game);
+        action(player, game);
+    }
+
 }

@@ -26,12 +26,13 @@ public class TestTwoCardsAndAny {
         String inputString = "1\n";
         ByteArrayInputStream in = new ByteArrayInputStream(inputString.getBytes());
         System.setIn(in);
+        game = new Game(0);
 
         assertEquals(0, (int)player.getResources().get(Resource.RESIN));
         assertEquals(0, player.getHandSize());
 
         twoCardsAndAny.visit(player.nextAvailableWorker(), game);
         assertEquals(2, player.getHandSize());
-        assertEquals(1, (int)player.getResources().get(Resource.RESIN));
+        assertEquals(1, (int)player.getResources().get(Resource.STONES));
     }
 }

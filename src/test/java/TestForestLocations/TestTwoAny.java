@@ -29,6 +29,7 @@ public class TestTwoAny {
         String input = "0\n3\n";
         ByteArrayInputStream in  = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        game = new Game(0);
 
         twoAny.visit(player.nextAvailableWorker(), game);
 

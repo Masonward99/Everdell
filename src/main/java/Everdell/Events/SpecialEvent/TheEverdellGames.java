@@ -30,7 +30,7 @@ public class TheEverdellGames extends SpecialEvent {
             else if (card instanceof TanTraveller) countTan++;
             else if (card instanceof Prosperity) countProsperity++;
             else if (card instanceof Destination) countDestination++;
-            else if (card instanceof Production) countProduction++;
+            if (card instanceof Production) countProduction++;
             if (countBlue >= 2 && countProduction >= 2 && countDestination >= 2 && countProsperity >= 2 && countTan >= 2) return true  ;
         }
         return false;

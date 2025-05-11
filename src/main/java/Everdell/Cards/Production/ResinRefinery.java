@@ -19,4 +19,12 @@ public class ResinRefinery extends Construction implements Production {
     public void action(Player player, Game game) {
         player.gainResource(Resource.RESIN, 1 );
     }
+
+
+    @Override
+    public void playCard(Player player, Game game) {
+        super.playCard(player, game);
+        action(player, game);
+    }
+
 }

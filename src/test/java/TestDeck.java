@@ -35,7 +35,7 @@ public class TestDeck {
     @Test
     public void testPopulate(){
         deck.populateDeck();
-        for (int i=0; i< 8; i++){
+        for (int i=0; i< 11; i++){
             assertFalse (deck.isEmpty());
             deck.drawCard();
         }
