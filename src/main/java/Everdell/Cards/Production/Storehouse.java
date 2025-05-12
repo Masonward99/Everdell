@@ -1,7 +1,6 @@
 package Everdell.Cards.Production;
 
-import Everdell.BasicLocation.Location;
-import Everdell.Cards.Construction;
+import Everdell.Locations.Location;
 import Everdell.Cards.Critter;
 import Everdell.Game;
 import Everdell.Player;
@@ -11,7 +10,7 @@ import Everdell.Worker;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Storehouse extends Construction implements Production, Location {
+public class Storehouse extends ProdutionConstruction implements Location {
     private Worker worker;
     private final TreeMap<Resource, Integer> storedResources;
     private Player player;
@@ -54,13 +53,12 @@ public class Storehouse extends Construction implements Production, Location {
     }
 
     @Override
-    public boolean canVisit(Worker worker) {
-        return this.worker == null && worker.getPlayer() == player;
+    public boolean canVisit(Player player) {
+        return worker == null && this.player == player;
     }
 
     @Override
-    public void visit(Worker worker, Game game) {
-        Player player = worker.getPlayer();
+    public void visit(Player player, Game game) {
         player.gainResources(storedResources);
         for (Resource resource : storedResources.keySet())  storedResources.put(resource, 0);
     }
@@ -69,6 +67,7 @@ public class Storehouse extends Construction implements Production, Location {
     public void playCard(Player player, Game game) {
         super.playCard(player, game);
         this.player = player;
+        action(player, game);
     }
 
     @Override

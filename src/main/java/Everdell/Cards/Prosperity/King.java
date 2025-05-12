@@ -6,7 +6,7 @@ import Everdell.Events.Event;
 import Everdell.Player;
 import Everdell.Resource;
 
-public class King extends Critter implements Prosperity {
+public class King extends ProsperityCritter {
     public King() {
         super("King", "Gain 1 point for each basic event, and 2 for each special event", true, 4);
         getCosts().put(Resource.BERRIES, 6);

@@ -8,7 +8,7 @@ import Everdell.Resource;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Courthouse extends Construction implements BlueGovernance {
+public class Courthouse extends BlueGovernanceConstruction {
     public Courthouse() {
         super("Courthouse", "Gain 1 wood, resin or stone after you play a construction", true, 2);
         TreeMap<Resource, Integer> costs = getCosts();

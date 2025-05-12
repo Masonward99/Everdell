@@ -8,10 +8,8 @@ import Everdell.Worker;
 
 import java.util.TreeMap;
 
-public class Chapel extends Construction implements Destination {
-    private Player player;
+public class Chapel extends DestinationConstruction {
     private int pointTokens;
-    private Worker worker;
 
     public Chapel() {
         super("Chapel", "Place 1 point token here, then draw 2 cards for each point token",true, 2 );
@@ -23,33 +21,9 @@ public class Chapel extends Construction implements Destination {
     }
 
     @Override
-    public boolean canVisit(Worker worker) {
-        return worker.getPlayer() == player;
-    }
-
-    @Override
-    public void visit(Worker worker, Game game) {
-        Player player = worker.getPlayer();
+    public void visit(Player player, Game game) {
         pointTokens += 1;
         game.drawCards(pointTokens * 2, player);
-    }
-
-    @Override
-    public Player getPlayer() {
-        return player;
-    }
-
-    @Override
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    @Override
-    public void returnWorker(Worker worker) {
-        worker = null;
-    }
-    public void addWorker(Worker worker) {
-        this.worker = worker;
     }
 
     @Override

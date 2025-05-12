@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.TwoResin;
+import Everdell.Locations.BasicLocation.TwoResin;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -23,14 +23,14 @@ public class TestTwoResin {
     public void testTwoResin() {
         assertEquals(0, (int) player.getResources().get(Resource.RESIN));
 
-        twoResin.visit(player.nextAvailableWorker(), game);
+        twoResin.visit(player, game);
         assertEquals(2, (int) player.getResources().get(Resource.RESIN));
     }
 
     @Test
     public void testCanVisit(){
-        assertTrue(twoResin.canVisit(player.nextAvailableWorker()));
+        assertTrue(twoResin.canVisit(player));
         game.visitLocation(player, twoResin);
-        assertFalse(twoResin.canVisit(player.nextAvailableWorker()));
+        assertFalse(twoResin.canVisit(player));
     }
 }

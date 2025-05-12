@@ -11,8 +11,7 @@ public class HarvestFestival extends BasicEvent {
     }
 
     @Override
-    public boolean canVisit(Worker worker) {
-        Player player = worker.getPlayer();
+    public boolean canVisit(Player player) {
         int count = 0;
         for (Card card : player.getBoard()){
             if (card instanceof Production){

@@ -8,7 +8,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class Castle extends Construction implements Prosperity {
+public class Castle extends ProsperityConstruction {
     public Castle() {
         super("Castle", "1 point for each common construction", true, 4);
         TreeMap<Resource, Integer> costs = getCosts();

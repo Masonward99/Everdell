@@ -13,8 +13,7 @@ public class CartographersExpedition extends BasicEvent {
     }
 
     @Override
-    public boolean canVisit(Worker worker) {
-        Player player = worker.getPlayer();
+    public boolean canVisit(Player player) {
         int count = 0;
         ArrayList<Card> cards = player.getBoard();
         cards.addAll(player.getPlayedNonBoardCards());

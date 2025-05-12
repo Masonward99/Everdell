@@ -1,6 +1,6 @@
 package TestForestLocations;
 
-import Everdell.ForestLocations.TwoAny;
+import Everdell.Locations.ForestLocations.TwoAny;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -31,7 +31,7 @@ public class TestTwoAny {
         System.setIn(in);
         game = new Game(0);
 
-        twoAny.visit(player.nextAvailableWorker(), game);
+        twoAny.visit(player, game);
 
         assertEquals(1, (int) player.getResources().get(Resource.BERRIES));
         assertEquals(1, (int) player.getResources().get(Resource.TWIGS));

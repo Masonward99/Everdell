@@ -21,4 +21,9 @@ public class Wanderer extends Critter implements TanTraveller {
         player.addNonBoardCard(this);
         action(player, game);
     }
+
+    @Override
+    public boolean isPlayable(Player player) {
+        return true;
+    }
 }

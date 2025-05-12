@@ -1,7 +1,6 @@
 package Everdell.Cards.Production;
 
 import Everdell.Cards.BlueGovernance.Shopkeeper;
-import Everdell.Cards.Construction;
 import Everdell.Cards.Critter;
 import Everdell.Game;
 import Everdell.Player;
@@ -9,7 +8,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class GeneralStore extends Construction implements Production {
+public class GeneralStore extends ProdutionConstruction {
     public GeneralStore() {
         super("General Store", "Gain 1 berry. If you have a farm gain another.", false, 1);
         TreeMap<Resource,Integer> costs = getCosts();
@@ -26,11 +25,5 @@ public class GeneralStore extends Construction implements Production {
         return critter instanceof Shopkeeper && !isOccupied();
     }
 
-
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 
 }

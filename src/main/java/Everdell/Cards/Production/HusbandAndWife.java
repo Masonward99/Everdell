@@ -19,4 +19,5 @@ public class HusbandAndWife extends Critter implements Prosperity, Production {
     public int bonusPoints(Player player) {
         return 3;
     }
+
 }

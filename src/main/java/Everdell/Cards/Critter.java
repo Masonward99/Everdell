@@ -7,11 +7,5 @@ public abstract class Critter extends Card {
         super(name,ability,isUnique,points );
     }
 
-    @Override
-    public boolean canBePlayedBy(Player player, int discount) {
-        if(!isPlayable(player)) return false;
-        else if (player.canOccupyBoard(this)) return true;
-        else if(player.getBoard().size() >= 15) return false;
-        return (player.hasEnoughResources(getCosts(), discount));
-    }
+
 }

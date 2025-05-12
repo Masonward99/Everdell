@@ -20,11 +20,11 @@ public class TestCityMonument {
     }
     @Test
     public void testCityMonument() {
-        assertFalse(cityMonument.canVisit(player.nextAvailableWorker()));
+        assertFalse(cityMonument.canVisit(player));
         player.addCardToBoard(new Shopkeeper());
         player.addCardToBoard(new Shopkeeper());
-        assertFalse(cityMonument.canVisit(player.nextAvailableWorker()));
+        assertFalse(cityMonument.canVisit(player));
         player.addCardToBoard(new Shopkeeper());
-        assertTrue(cityMonument.canVisit(player.nextAvailableWorker()));
+        assertTrue(cityMonument.canVisit(player));
     }
 }

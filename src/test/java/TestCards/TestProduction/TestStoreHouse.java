@@ -58,7 +58,7 @@ public class TestStoreHouse {
         game = new Game(0);
         storehouse.action(player, game);
         assertEquals(3, (int)storehouse.getStoredResources().get(Resource.TWIGS));
-        storehouse.visit(player.nextAvailableWorker(), game);
+        storehouse.visit(player, game);
         assertEquals(0, (int)storehouse.getStoredResources().get(Resource.TWIGS));
         assertEquals(3, (int)player.getResources().get(Resource.TWIGS));
     }

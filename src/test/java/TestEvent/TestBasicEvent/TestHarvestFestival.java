@@ -21,14 +21,14 @@ public class TestHarvestFestival {
     }
     @Test
     public void testHarvestFestival() {
-        assertFalse(harvestFestival.canVisit(player.nextAvailableWorker()));
+        assertFalse(harvestFestival.canVisit(player));
         player.addCardToBoard(new BargeToad());
         player.addCardToBoard(new Mine());
         player.addCardToBoard(new BargeToad());
-        assertFalse(harvestFestival.canVisit(player.nextAvailableWorker()));
+        assertFalse(harvestFestival.canVisit(player));
         player.addCardToBoard(new Chapel());
-        assertFalse(harvestFestival.canVisit(player.nextAvailableWorker()));
+        assertFalse(harvestFestival.canVisit(player));
         player.addCardToBoard(new BargeToad());
-        assertTrue(harvestFestival.canVisit(player.nextAvailableWorker()));
+        assertTrue(harvestFestival.canVisit(player));
     }
 }

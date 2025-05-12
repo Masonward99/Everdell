@@ -5,7 +5,7 @@ import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
 
-public class Innkeeper extends Construction implements BlueGovernance, Discounter {
+public class Innkeeper extends BlueGovernanceCritter implements Discounter {
     public Innkeeper() {
         super("Innkeeper", "When playing a critter you may discard this to decrease cost by 3 berries", true, 1);
         getCosts().put(Resource.BERRIES, 1);

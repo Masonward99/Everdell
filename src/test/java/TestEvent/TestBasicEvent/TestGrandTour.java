@@ -20,11 +20,11 @@ public class TestGrandTour {
     }
     @Test
     public void testGrandTour() {
-        assertFalse(grandTour.canVisit(player.nextAvailableWorker()));
+        assertFalse(grandTour.canVisit(player));
         player.addCardToBoard(new Chapel());
         player.addCardToBoard(new Chapel());
-        assertFalse(grandTour.canVisit(player.nextAvailableWorker()));
+        assertFalse(grandTour.canVisit(player));
         player.addCardToBoard(new Chapel());
-        assertTrue(grandTour.canVisit(player.nextAvailableWorker()));
+        assertTrue(grandTour.canVisit(player));
     }
 }

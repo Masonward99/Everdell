@@ -7,6 +7,7 @@ import Everdell.Cards.Production.Production;
 import Everdell.Cards.Prosperity.Prosperity;
 import Everdell.Cards.TanTraveller.TanTraveller;
 import Everdell.Game;
+import Everdell.Player;
 import Everdell.Worker;
 
 import java.util.ArrayList;
@@ -17,14 +18,14 @@ public class TheEverdellGames extends SpecialEvent {
     }
 
     @Override
-    public boolean canVisit(Worker worker) {
+    public boolean canVisit(Player player) {
         int countBlue = 0;
         int countTan = 0;
         int countProsperity = 0;
         int countDestination = 0;
         int countProduction = 0;
-        ArrayList<Card> cards = worker.getPlayer().getBoard();
-        cards.addAll(worker.getPlayer().getPlayedNonBoardCards());
+        ArrayList<Card> cards = player.getBoard();
+        cards.addAll(player.getPlayedNonBoardCards());
         for (Card card : cards) {
             if (card instanceof BlueGovernance) countBlue++;
             else if (card instanceof TanTraveller) countTan++;
@@ -42,7 +43,7 @@ public class TheEverdellGames extends SpecialEvent {
     }
 
     @Override
-    public void visit(Worker worker, Game game) {
+    public void visit(Player player, Game game) {
         return;
     }
 }

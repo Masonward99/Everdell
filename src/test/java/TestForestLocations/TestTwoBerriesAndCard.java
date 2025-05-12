@@ -1,6 +1,6 @@
 package TestForestLocations;
 
-import Everdell.ForestLocations.TwoBerriesAndCard;
+import Everdell.Locations.ForestLocations.TwoBerriesAndCard;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -24,7 +24,7 @@ public class TestTwoBerriesAndCard {
         assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
         assertEquals(0, player.getHandSize());
 
-        twoBerriesAndCard.visit(player.nextAvailableWorker(), game);
+        twoBerriesAndCard.visit(player, game);
         assertEquals(2, (int) player.getResources().get(Resource.BERRIES));
         assertEquals(1, player.getHandSize());
     }

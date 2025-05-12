@@ -1,10 +1,12 @@
 package Everdell;
 
-import Everdell.BasicLocation.*;
 import Everdell.Cards.Card;
 import Everdell.Events.BasicEvents.*;
 import Everdell.Events.Event;
-import Everdell.ForestLocations.*;
+import Everdell.Locations.BasicLocation.*;
+import Everdell.Locations.ForestLocations.*;
+import Everdell.Locations.Haven;
+import Everdell.Locations.Location;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +19,10 @@ public class Game {
     private final ForestLocation[] forestLocations;
     private final ArrayList<Event> basicEvents;
     private final InputReader input;
+    private final Meadow meadow;
+    private final Haven haven;
+
+    //constructors
     public Game(int numPlayers) {
         deck = new Deck();
         players = new Player[numPlayers];
@@ -29,33 +35,28 @@ public class Game {
         basicEvents = new ArrayList<>();
         setUpBasicEvents();
         input = new InputReader();
+        meadow = new Meadow();
+        refillMeadow();
+        haven = new Haven();
 
     }
+    // getters and setters
     public InputReader getInput() {return input;}
-    public void refillDeck (){
+
+    public Meadow getMeadow() {return meadow;}
+
+    public BasicLocation[] getBasicLocations() {return basicLocations;}
+
+    public ForestLocation[] getForestLocations() {return forestLocations;}
+
+    public ArrayList<Card> getDiscard() {return discard;}
+
+    //helpers
+    private void refillDeck (){
         deck.addCards(discard);
         discard.clear();
     }
-    public void drawCards(int numCards, Player player) {
-        for (int i = 0; i < numCards; i++){
-            if (deck.isEmpty()){
-                refillDeck();
-            }
-            Card card = deck.drawCard();
-            if (player.getHandSize() < Player.HAND_LIMIT) {
-                player.addCard(card);
-            }
-            else {
-                discard.add(card);
-            }
-        }
-    }
-    public void visitLocation (Player player, Location location) {
-        Worker worker = player.nextAvailableWorker();
-        location.visit(worker, this);
-        worker.placeWorker(location);
-        location.addWorker(worker);
-    }
+
     private void setUpBasicLocations() {
         basicLocations[0] = new ThreeTwigs();
         basicLocations[1] = new TwoTwigsAndCard();
@@ -66,6 +67,7 @@ public class Game {
         basicLocations[6] = new BerryAndCard();
         basicLocations[7] = new BerryAndCard();
     }
+
     private void setUpForestLocations(int numPlayers) {
         ArrayList<ForestLocation> forestLocations = new ArrayList<>();
         Random rand = new Random();
@@ -83,12 +85,69 @@ public class Game {
             forestLocations.remove(forestLocation);
         }
     }
+
     private void setUpBasicEvents() {
         basicEvents.add(new CityMonument());
         basicEvents.add(new GrandTour());
         basicEvents.add(new HarvestFestival());
         basicEvents.add(new CartographersExpedition());
     }
+
+    //Methods related to meadow
+    public void drawFromMeadow(Player player) {
+        Card card = input.getCardFromUser(meadow.getCards());
+        meadow.discard(card);
+        addCardToPlayer(player, card);
+        refillMeadow();
+    }
+
+    public void discardFromMeadow() {
+        Card card = input.getCardFromUser(meadow.getCards());
+        meadow.discard(card);
+        discard.add(card);
+    }
+
+    //Card drawing
+    public Card drawCard(){
+        if (deck.isEmpty()){
+            refillDeck();
+        }
+        return deck.drawCard();
+    }
+
+    public void refillMeadow(){
+        while (meadow.isNotFull()){meadow.add(drawCard());}
+    }
+
+    public void addCardToPlayer(Player player, Card card){
+        if (player.getHandSize() < Player.HAND_LIMIT) {
+            player.addCard(card);
+        }
+        else {
+            discard.add(card);
+        }
+    }
+
+    public void drawCards(int numCards, Player player) {
+        for (int i = 0; i < numCards; i++) addCardToPlayer(player, drawCard());
+
+    }
+
+    public ArrayList<Card> revealCards(int numCards) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (int i = 0; i < numCards; i++) cards.add(drawCard());
+        return cards;
+    }
+
+    //locations
+    public void visitLocation (Player player, Location location) {
+        Worker worker = player.nextAvailableWorker();
+        location.visit(player, this);
+        worker.placeWorker(location);
+        location.addWorker(worker);
+    }
+
+    //resources
     public void gainAnyResource ( int numGained, Player player) {
         ArrayList<Resource> resources = new ArrayList<>();
         resources.add(Resource.TWIGS);
@@ -101,7 +160,11 @@ public class Game {
         }
     }
 
-
-    public BasicLocation[] getBasicLocations() {return basicLocations;}
-    public ForestLocation[] getForestLocations() {return forestLocations;}
+    public void discardCards(int numCards, Player player) {
+        for (int i = 0; i < numCards; i++){
+            Card card = input.getCardFromUser(player.getHand());
+            player.removeCardFromHand(card);
+            discard.add(card);
+        }
+    }
 }

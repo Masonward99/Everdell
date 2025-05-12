@@ -18,10 +18,5 @@ public abstract class  Construction extends Card {
         return true;
     }
 
-    @Override
-    public boolean canBePlayedBy(Player player, int discount) {
-        if (!isPlayable(player)) return false;
-        else if(player.getBoard().size() >= 15) return false;
-        return player.hasEnoughResources(getCosts(), discount);
-    }
+
 }

@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.TwoCardsAndPoint;
+import Everdell.Locations.BasicLocation.TwoCardsAndPoint;
 import Everdell.Game;
 import Everdell.Player;
 import org.junit.Before;
@@ -23,11 +23,11 @@ public class TestTwoCardsAndPoint {
         assertEquals(0, player.getPointTokens());
         assertEquals(0, player.getHandSize());
 
-        twoCardsAndPoint.visit(player.nextAvailableWorker(), game);
+        twoCardsAndPoint.visit(player, game);
         assertEquals(1, player.getPointTokens());
         assertEquals(2, player.getHandSize());
 
-        twoCardsAndPoint.visit(player.nextAvailableWorker(), game);
+        twoCardsAndPoint.visit(player, game);
         assertEquals(2, player.getPointTokens());
         assertEquals(4, player.getHandSize());
     }

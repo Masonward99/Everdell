@@ -1,11 +1,9 @@
-package Everdell.ForestLocations;
+package Everdell.Locations.ForestLocations;
 
-import Everdell.BasicLocation.Location;
+import Everdell.Locations.Location;
 import Everdell.Player;
 import Everdell.Worker;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 public abstract class ForestLocation implements Location {
@@ -18,14 +16,14 @@ public abstract class ForestLocation implements Location {
         workers = new ArrayList<>();
     }
     @Override
-    public boolean canVisit(Worker worker) {
+    public boolean canVisit(Player player) {
        if(workers.isEmpty()) {
            return true;
        }
        else if (workers.size() == maxWorkers) {
            return false;
        }
-        return !containsPlayer(worker.getPlayer());
+        return !containsPlayer(player);
     }
     private boolean containsPlayer(Player player) {
         for (Worker worker : workers) {

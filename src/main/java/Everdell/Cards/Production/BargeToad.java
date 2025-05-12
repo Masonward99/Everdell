@@ -5,7 +5,7 @@ import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
 
-public class BargeToad extends Critter implements Production {
+public class BargeToad extends ProductionCritter {
     public BargeToad() {
         super("Barge Toad", "Gain 2 twigs for each farm in your city", false, 1);
     }
@@ -16,9 +16,4 @@ public class BargeToad extends Critter implements Production {
         player.gainResource(Resource.TWIGS, numFarms * 2);
     }
 
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 }

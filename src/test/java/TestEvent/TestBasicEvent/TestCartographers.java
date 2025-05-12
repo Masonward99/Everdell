@@ -22,19 +22,19 @@ public class TestCartographers {
     }
     @Test
     public void testCanVisit(){
-        assertFalse(expedition.canVisit(player.nextAvailableWorker()));
+        assertFalse(expedition.canVisit(player));
         player.addCardToBoard(new Wanderer());
         player.addCardToBoard(new Wanderer());
-        assertFalse(expedition.canVisit(player.nextAvailableWorker()));
+        assertFalse(expedition.canVisit(player));
         player.addCardToBoard(new Wanderer());
-        assertTrue(expedition.canVisit(player.nextAvailableWorker()));
+        assertTrue(expedition.canVisit(player));
     }
     @Test
     public void testCanVisitWithCardsNotInBoard (){
         player.addCardToBoard(new Wanderer());
         player.addCardToBoard(new Wanderer());
-        assertFalse(expedition.canVisit(player.nextAvailableWorker()));
+        assertFalse(expedition.canVisit(player));
         player.addNonBoardCard(new Wanderer());
-        assertTrue(expedition.canVisit(player.nextAvailableWorker()));
+        assertTrue(expedition.canVisit(player));
     }
 }

@@ -1,6 +1,6 @@
 package TestForestLocations;
 
-import Everdell.ForestLocations.BasicLocationAndCard;
+import Everdell.Locations.ForestLocations.BasicLocationAndCard;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -29,14 +29,14 @@ public class TestBasicLocationAndCard {
         game = new Game(0);
 
         assertEquals(0, (int) player.getResources().get(Resource.TWIGS));
-        basicLocationAndCard.visit(player.nextAvailableWorker(), game);
+        basicLocationAndCard.visit(player, game);
         assertEquals(1, player.getHandSize());
         assertEquals(3, (int) player.getResources().get(Resource.TWIGS));
-        basicLocationAndCard.visit(player.nextAvailableWorker(), game);
+        basicLocationAndCard.visit(player, game);
         assertEquals(2, player.getHandSize());
         assertEquals(1, (int) player.getResources().get(Resource.STONES));
         assertEquals(3, (int) player.getResources().get(Resource.TWIGS));
-        basicLocationAndCard.visit(player.nextAvailableWorker(), game);
+        basicLocationAndCard.visit(player, game);
         assertEquals(1, (int) player.getResources().get(Resource.RESIN));
         assertEquals(4, (int) player.getHandSize());
     }

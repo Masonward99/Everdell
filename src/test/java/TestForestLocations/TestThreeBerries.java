@@ -1,6 +1,6 @@
 package TestForestLocations;
 
-import Everdell.ForestLocations.ForestThreeBerries;
+import Everdell.Locations.ForestLocations.ForestThreeBerries;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -22,25 +22,25 @@ public class TestThreeBerries {
     @Test
     public void testThreeBerries() {
         assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
-        forestThreeBerries.visit(player.nextAvailableWorker(),game);
+        forestThreeBerries.visit(player, game);
         assertEquals(3, (int) player.getResources().get(Resource.BERRIES));
     }
     @Test
     public void testCanVisit (){
-        assertTrue(forestThreeBerries.canVisit(player.nextAvailableWorker()));
+        assertTrue(forestThreeBerries.canVisit(player));
         game.visitLocation(player,forestThreeBerries);
         Player player2 = new Player("Alan");
-        assertFalse(forestThreeBerries.canVisit(player2.nextAvailableWorker()));
+        assertFalse(forestThreeBerries.canVisit(player2));
     }
     @Test
     public void testCanVisitWith4Players(){
         forestThreeBerries = new ForestThreeBerries(4);
-        assertTrue(forestThreeBerries.canVisit(player.nextAvailableWorker()));
+        assertTrue(forestThreeBerries.canVisit(player));
         game.visitLocation(player,forestThreeBerries);
         //same player cannot visit again
-        assertFalse(forestThreeBerries.canVisit(player.nextAvailableWorker()));
+        assertFalse(forestThreeBerries.canVisit(player));
         //different player can visit
         Player player2 = new Player("Alan");
-        assertTrue(forestThreeBerries.canVisit(player2.nextAvailableWorker()));
+        assertTrue(forestThreeBerries.canVisit(player2));
     }
 }

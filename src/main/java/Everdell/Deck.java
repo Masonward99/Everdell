@@ -25,7 +25,7 @@ public class Deck {
         Collections.shuffle(deck);
     }
     public void populateDeck() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 25; i++) {
             deck.add(new Farm());
         }
         for (int i = 0; i < 3; i++) {

@@ -9,7 +9,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class Farm extends Construction implements Production {
+public class Farm extends ProdutionConstruction{
     public Farm() {
         super("Farm", "Gain one berry", false, 1);
         TreeMap<Resource, Integer> costs = getCosts();
@@ -22,12 +22,6 @@ public class Farm extends Construction implements Production {
         player.gainResource(Resource.BERRIES, 1);
     }
 
-
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 
     @Override
     public boolean canBeOccupiedBy(Critter critter) {

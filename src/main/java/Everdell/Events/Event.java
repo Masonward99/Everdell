@@ -1,6 +1,6 @@
 package Everdell.Events;
 
-import Everdell.BasicLocation.Location;
+import Everdell.Locations.Location;
 import Everdell.Worker;
 
 public abstract class Event implements Location{

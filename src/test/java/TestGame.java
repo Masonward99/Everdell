@@ -1,7 +1,12 @@
-import Everdell.BasicLocation.BasicLocation;
-import Everdell.BasicLocation.Location;
-import Everdell.BasicLocation.OneBerry;
-import Everdell.ForestLocations.ForestLocation;
+import Everdell.Locations.BasicLocation.BasicLocation;
+import Everdell.Locations.BasicLocation.OneBerry;
+import Everdell.Cards.Production.Farm;
+import Everdell.Cards.Production.ResinRefinery;
+import Everdell.Cards.Prosperity.Architect;
+import Everdell.Cards.Prosperity.Castle;
+import Everdell.Cards.Prosperity.Palace;
+import Everdell.Cards.Prosperity.Theater;
+import Everdell.Locations.ForestLocations.ForestLocation;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -9,9 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TestGame {
     private Game game;
@@ -73,5 +77,65 @@ public class TestGame {
         forestLocations = game.getForestLocations();
         assert(forestLocations.length == 4);
         assert(forestLocations[3] == null);
+    }
+
+    @Test
+    public void testDiscardCardsWith1Discard(){
+        String input = "5\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        game = new Game(0);
+
+        player.addCard(new Farm());
+        player.addCard(new Architect());
+        player.addCard(new Castle());
+        player.addCard(new Palace());
+        player.addCard(new ResinRefinery());
+        Theater theater = new Theater();
+        player.addCard(theater);
+        assertTrue(player.getHand().contains(theater));
+        game.discardCards(1, player);
+        assertFalse(player.getHand().contains(theater));
+        assertEquals(5, player.getHandSize() );
+        assertEquals(1, game.getDiscard().size());
+
+    }
+    @Test
+    public void testDiscardCardsWith3Discard(){
+        String input = "5\n0\n1\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        game = new Game(0);
+        Farm farm = new Farm();
+        player.addCard(farm);
+        player.addCard(new Architect());
+        Castle castle = new Castle();
+        player.addCard(castle);
+        player.addCard(new Palace());
+        player.addCard(new ResinRefinery());
+        Theater theater = new Theater();
+        player.addCard(theater);
+        assertTrue(player.getHand().contains(theater));
+        assertTrue(player.getHand().contains(castle));
+        assertTrue(player.getHand().contains(farm));
+        assertEquals(6, player.getHandSize());
+        game.discardCards(3, player);
+        assertFalse(player.getHand().contains(theater));
+        assertFalse(player.getHand().contains(castle));
+        assertFalse(player.getHand().contains(farm));
+        assertEquals(3, player.getHandSize());
+        assertEquals(3, game.getDiscard().size());
+        assertEquals(castle, game.getDiscard().getLast());
+    }
+
+    @Test
+    public void testRefillMeadow(){
+        assertEquals(8, game.getMeadow().getCards().size());
+        assertFalse(game.getMeadow().getCards().contains(null));
+        game.getMeadow().discard(game.getMeadow().getCards().get(0));
+        game.getMeadow().discard(game.getMeadow().getCards().get(1));
+        assertEquals(6, game.getMeadow().getCards().size() );
+        game.refillMeadow();
+        assertEquals(8, game.getMeadow().getCards().size() );
     }
 }

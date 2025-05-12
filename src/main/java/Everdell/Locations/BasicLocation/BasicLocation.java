@@ -1,5 +1,6 @@
-package Everdell.BasicLocation;
+package Everdell.Locations.BasicLocation;
 
+import Everdell.Locations.Location;
 import Everdell.Worker;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Everdell;
 
-import Everdell.BasicLocation.Location;
+import Everdell.Locations.Location;
 
 public class Worker {
     private Location location;

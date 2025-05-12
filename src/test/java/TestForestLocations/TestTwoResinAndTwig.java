@@ -1,6 +1,6 @@
 package TestForestLocations;
 
-import Everdell.ForestLocations.TwoResinAndTwig;
+import Everdell.Locations.ForestLocations.TwoResinAndTwig;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -25,7 +25,7 @@ public class TestTwoResinAndTwig {
         assertEquals(0, (int)player.getResources().get(Resource.RESIN));
         assertEquals(0, (int) player.getResources().get(Resource.TWIGS));
 
-        twoResinAndTwig.visit(player.nextAvailableWorker(), game);
+        twoResinAndTwig.visit(player, game);
         assertEquals(2, (int)player.getResources().get(Resource.RESIN));
         assertEquals(1, (int)player.getResources().get(Resource.TWIGS));
     }

@@ -9,7 +9,7 @@ import Everdell.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ChipSweep extends Critter implements Production {
+public class ChipSweep extends ProductionCritter {
     public ChipSweep() {
         super("Chip Sweep", "Activate 1 production in your city", false, 2);
         getCosts().put(Resource.BERRIES, 3);
@@ -27,4 +27,5 @@ public class ChipSweep extends Critter implements Production {
         Card card = game.getInput().getCardFromUser(productions);
         if(card != null) ((Production) card).action(player, game);
     }
+
 }

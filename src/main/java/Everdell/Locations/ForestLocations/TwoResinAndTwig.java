@@ -1,9 +1,8 @@
-package Everdell.ForestLocations;
+package Everdell.Locations.ForestLocations;
 
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
-import Everdell.Worker;
 
 public class TwoResinAndTwig extends ForestLocation {
     public TwoResinAndTwig(int numPlayers) {
@@ -11,8 +10,7 @@ public class TwoResinAndTwig extends ForestLocation {
     }
 
     @Override
-    public void visit(Worker worker, Game game) {
-        Player player = worker.getPlayer();
+    public void visit(Player player, Game game) {
         player.gainResource(Resource.RESIN, 2);
         player.gainResource(Resource.TWIGS, 1);
     }

@@ -7,7 +7,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class Mine extends Construction implements Production {
+public class Mine extends ProdutionConstruction {
     public Mine() {
         super("Mine", "Gain 1 stone", false, 2 );
         TreeMap<Resource, Integer> costs = getCosts();
@@ -19,11 +19,5 @@ public class Mine extends Construction implements Production {
         player.gainResource(Resource.STONES, 1);
     }
 
-
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 
 }

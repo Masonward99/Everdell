@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.TwoTwigsAndCard;
+import Everdell.Locations.BasicLocation.TwoTwigsAndCard;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -21,10 +21,10 @@ public class TestTwoTwigsAndCard {
     }
     @Test
     public void testTwoTwigsAndCard() {
-        twoTwigsAndCard.visit(player.nextAvailableWorker(), game);
+        twoTwigsAndCard.visit(player, game);
         assertEquals(1, player.getHandSize());
         assertEquals(2, (int) player.getResources().get(Resource.TWIGS));
-        twoTwigsAndCard.visit(player.nextAvailableWorker(), game);
+        twoTwigsAndCard.visit(player, game);
         assertEquals(2, player.getHandSize());
         assertEquals(4, (int) player.getResources().get(Resource.TWIGS));
     }

@@ -1,7 +1,7 @@
 package Everdell.Cards.Production;
 
 
-import Everdell.Cards.Construction;
+
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -9,7 +9,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class Fairgrounds extends Construction implements Production {
+public class Fairgrounds extends ProdutionConstruction {
     public Fairgrounds() {
         super("Fairgrounds", "Draw 2 cards", true, 3);
         TreeMap<Resource, Integer> resources = getCosts();
@@ -23,9 +23,5 @@ public class Fairgrounds extends Construction implements Production {
         game.drawCards(2, player);
     }
 
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
+
     }

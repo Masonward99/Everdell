@@ -1,21 +1,18 @@
 package Everdell.Cards.Destination;
 
-import Everdell.BasicLocation.Location;
-import Everdell.Cards.Construction;
+import Everdell.Locations.Location;
 import Everdell.Cards.Critter;
 import Everdell.Cards.TanTraveller.Wanderer;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
-import Everdell.Worker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
 
-public class Lookout extends Construction implements Destination {
-    private Player player;
-    private Worker worker;
+public class Lookout extends DestinationConstruction {
+
     public Lookout() {
         super("Lookout", "Copy any basic or forest location", true, 2);
         TreeMap<Resource, Integer> costs = getCosts();
@@ -25,36 +22,12 @@ public class Lookout extends Construction implements Destination {
     }
 
     @Override
-    public Player getPlayer() {
-        return player;
-    }
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    @Override
-    public boolean canVisit(Worker worker) {
-        return worker.getPlayer() == player && this.worker == null;
-    }
-
-    @Override
-    public void visit(Worker worker, Game game) {
+    public void visit(Player player, Game game) {
         ArrayList<Location> locations= new ArrayList<>();
         locations.addAll(Arrays.asList(game.getBasicLocations()));
         locations.addAll(Arrays.asList(game.getForestLocations()));
         Location location = game.getInput().getLocationFromUser(locations);
-        location.visit(worker, game);
-
-    }
-
-    @Override
-    public void returnWorker(Worker worker) {
-        this.worker = null;
-    }
-
-    @Override
-    public void addWorker(Worker worker) {
-        this.worker = worker;
+        location.visit(player, game);
     }
 
     @Override

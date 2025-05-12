@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.OneBerry;
+import Everdell.Locations.BasicLocation.OneBerry;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -23,10 +23,10 @@ public class TestOneBerry {
     @Test
     public void testVisit(){
         assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
-        oneBerry.visit(player.nextAvailableWorker(),game);
+        oneBerry.visit(player,game);
         assertEquals(1, (int) player.getResources().get(Resource.BERRIES));
 
-        oneBerry.visit(player.nextAvailableWorker(),game);
+        oneBerry.visit(player,game);
         assertEquals(2, (int) player.getResources().get(Resource.BERRIES));
     }
 

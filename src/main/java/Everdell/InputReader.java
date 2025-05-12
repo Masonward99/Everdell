@@ -1,7 +1,7 @@
 package Everdell;
 
-import Everdell.BasicLocation.Location;
 import Everdell.Cards.Card;
+import Everdell.Locations.Location;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,14 +33,18 @@ public class InputReader {
         if(cards.size() == 1) return cards.getFirst();
         System.out.println("Select a card:");
         for (int j = 0 ; j < cards.size() ;j++) {
-            System.out.println(j  + ": " +  cards.get(j).toString() );
+            if (cards.get(j) != null){
+                System.out.println(j  + ": " +  cards.get(j).toString() );
+            }else{
+                System.out.println(j  + ": " +  "no card selected" );
+            }
         }
         int index = getIntInRange(cards.size());
         return cards.get(index);
     }
     public Location getLocationFromUser (ArrayList<Location> locations) {
         if (locations.isEmpty()) return null;
-        if (locations.size() == 1) return locations.get(0);
+        if (locations.size() == 1) return locations.getFirst();
         System.out.println("Select a location:");
         for (int j = 0 ; j < locations.size() ;j++) {
             System.out.println(j  + ": " + locations.get(j).toString() );
@@ -48,6 +52,16 @@ public class InputReader {
         int index = getIntInRange(locations.size());
         return locations.get(index);
     }
-
+    public Card getCardOrNull(ArrayList<Card> cards) {
+        if (cards.isEmpty()) return null;
+        if(cards.size() == 1) return cards.getFirst();
+        cards.add(null);
+        System.out.println("Select a card:");
+        for (int j = 0 ; j < cards.size() ;j++) {
+            System.out.println(j  + ": " +  cards.get(j).toString() );
+        }
+        int index = getIntInRange(cards.size());
+        return cards.get(index);
+    }
 
 }

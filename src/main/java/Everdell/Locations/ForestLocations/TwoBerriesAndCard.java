@@ -1,9 +1,8 @@
-package Everdell.ForestLocations;
+package Everdell.Locations.ForestLocations;
 
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
-import Everdell.Worker;
 
 public class TwoBerriesAndCard extends ForestLocation {
     public TwoBerriesAndCard(int maxPlayers) {
@@ -11,8 +10,7 @@ public class TwoBerriesAndCard extends ForestLocation {
     }
 
     @Override
-    public void visit(Worker worker, Game game) {
-        Player player = worker.getPlayer();
+    public void visit(Player player, Game game) {
         player.gainResource(Resource.BERRIES, 2);
         game.drawCards(1,player);
     }

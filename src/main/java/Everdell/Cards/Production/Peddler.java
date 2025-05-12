@@ -8,7 +8,7 @@ import Everdell.Resource;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Peddler extends Critter implements Production {
+public class Peddler extends ProductionCritter {
     public Peddler() {
         super("Peddler", "You may pay up to 2 any to gain an equal ammount of any", false, 1);
         getCosts().put(Resource.BERRIES,2 );

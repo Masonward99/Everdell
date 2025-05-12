@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.BerryAndCard;
+import Everdell.Locations.BasicLocation.BerryAndCard;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -24,15 +24,15 @@ public class TestBerryAndCard {
         assertEquals(0, (int) player.getResources().get(Resource.BERRIES));
         assertEquals(0, player.getHandSize());
 
-        berryAndCard.visit(player.nextAvailableWorker(), game);
+        berryAndCard.visit(player, game);
         assertEquals(1, (int) player.getResources().get(Resource.BERRIES));
         assertEquals(1, player.getHandSize());
     }
 
     @Test
     public void canVisit(){
-        assertTrue(berryAndCard.canVisit(player.nextAvailableWorker()));
+        assertTrue(berryAndCard.canVisit(player));
         game.visitLocation(player, berryAndCard);
-        assertFalse(berryAndCard.canVisit(player.nextAvailableWorker()));
+        assertFalse(berryAndCard.canVisit(player));
     }
 }

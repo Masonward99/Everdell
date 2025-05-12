@@ -31,9 +31,9 @@ public class TestLookout {
         game = new Game(0);
 
         assertEquals(0, (int) player.getResources().get(Resource.TWIGS));
-        lookout.visit(player.nextAvailableWorker(), game);
+        lookout.visit(player, game);
         assertEquals(3, (int) player.getResources().get(Resource.TWIGS));
-        lookout.visit(player.nextAvailableWorker(), game);
+        lookout.visit(player, game);
         assertEquals(5, (int) player.getResources().get(Resource.TWIGS));
         assertEquals(1, player.getHandSize());
     }

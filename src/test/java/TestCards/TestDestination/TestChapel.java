@@ -22,9 +22,9 @@ public class TestChapel {
     @Test
     public void testChapel() {
         assertEquals(0, player.getHandSize());
-        chapel.visit(player.nextAvailableWorker(), game);
+        chapel.visit(player, game);
         assertEquals(2, player.getHandSize());
-        chapel.visit(player.nextAvailableWorker(), game);
+        chapel.visit(player, game);
         assertEquals(6, player.getHandSize());
         assertEquals(4, chapel.getPoints());
     }

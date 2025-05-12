@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.ThreeTwigs;
+import Everdell.Locations.BasicLocation.ThreeTwigs;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -23,14 +23,14 @@ public class TestThreeTwigs {
     @Test
     public void testThreeTwigs() {
         assertEquals (0, (int) player.getResources().get(Resource.TWIGS));
-        threeTwigs.visit(player.nextAvailableWorker(),game);
+        threeTwigs.visit(player,game);
         assertEquals (3, (int) player.getResources().get(Resource.TWIGS));
     }
 
     @Test
     public void testCanVisit (){
-        assertTrue(threeTwigs.canVisit(player.nextAvailableWorker()));
+        assertTrue(threeTwigs.canVisit(player));
         game.visitLocation(player,threeTwigs);
-        assertFalse(threeTwigs.canVisit(player.nextAvailableWorker()));
+        assertFalse(threeTwigs.canVisit(player));
     }
 }

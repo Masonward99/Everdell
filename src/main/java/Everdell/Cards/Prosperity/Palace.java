@@ -2,12 +2,14 @@ package Everdell.Cards.Prosperity;
 
 import Everdell.Cards.Card;
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
+import Everdell.Cards.Destination.Queen;
 import Everdell.Player;
 import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class Palace extends Construction implements Prosperity {
+public class Palace extends ProsperityConstruction {
     public Palace() {
         super("Palace", "1 point for each unique construction in your city", true, 4);
         TreeMap<Resource, Integer> costs = getCosts();
@@ -25,5 +27,10 @@ public class Palace extends Construction implements Prosperity {
             }
         }
         return bonus;
+    }
+
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof Queen && !isOccupied();
     }
 }

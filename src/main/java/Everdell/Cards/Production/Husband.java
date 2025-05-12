@@ -1,6 +1,8 @@
 package Everdell.Cards.Production;
 
+import Everdell.Cards.Card;
 import Everdell.Cards.Critter;
+import Everdell.Cards.Prosperity.Wife;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -14,5 +16,21 @@ public class Husband extends Critter implements Production {
     @Override
     public void action(Player player, Game game) {
         return;
+    }
+
+    @Override
+    public void playCard(Player player, Game game) {
+        boolean hasWife = player.isCardOnBoard(new Wife());
+        if (hasWife) {
+            Wife wife = null;
+            for(Card card : player.getBoard()) {
+                if (card instanceof Wife) {wife = (Wife)card; break; }
+            }
+            player.getBoard().remove(wife);
+            HusbandAndWife husbandAndWife = new HusbandAndWife();
+            player.addCard(husbandAndWife);
+            husbandAndWife.action(player, game);
+        }
+        else player.addCard(this);
     }
 }

@@ -6,7 +6,7 @@ import Everdell.Player;
 import Everdell.Resource;
 
 
-public class Woodcarver extends Critter implements Production{
+public class Woodcarver extends ProductionCritter {
     public Woodcarver() {
         super("Woodcarver", "You may pay up to 3 twigs to gain 1 point token each", false, 2);
         getCosts().put(Resource.BERRIES, 2);

@@ -8,7 +8,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class TwigBarge extends Construction implements Production {
+public class TwigBarge extends ProdutionConstruction {
     public TwigBarge() {
         super("Twig Barge", "Gain 2 twigs", false, 1);
         TreeMap<Resource, Integer> costs= getCosts();
@@ -25,11 +25,5 @@ public class TwigBarge extends Construction implements Production {
         return critter instanceof BargeToad && !isOccupied();
     }
 
-
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 
 }

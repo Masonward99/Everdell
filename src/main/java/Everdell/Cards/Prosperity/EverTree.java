@@ -8,7 +8,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class EverTree extends Construction implements Prosperity {
+public class EverTree extends ProsperityConstruction {
     public EverTree() {
         super("Ever Tree", "1 point for each prosperity card in your city", true, 5);
         TreeMap<Resource, Integer> costs = getCosts();

@@ -8,7 +8,7 @@ import Everdell.Resource;
 
 import java.util.TreeMap;
 
-public class ResinRefinery extends Construction implements Production {
+public class ResinRefinery extends ProdutionConstruction {
     public ResinRefinery() {
         super("Resin Refinery", "Gain 1 resin", false , 1);
         TreeMap<Resource, Integer> costs = getCosts();
@@ -21,12 +21,6 @@ public class ResinRefinery extends Construction implements Production {
         player.gainResource(Resource.RESIN, 1 );
     }
 
-
-    @Override
-    public void playCard(Player player, Game game) {
-        super.playCard(player, game);
-        action(player, game);
-    }
 
     @Override
     public boolean canBeOccupiedBy(Critter critter) {

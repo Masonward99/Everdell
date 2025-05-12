@@ -1,6 +1,6 @@
 package TestBasicLocations;
 
-import Everdell.BasicLocation.ResinAndCard;
+import Everdell.Locations.BasicLocation.ResinAndCard;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -24,11 +24,11 @@ public class TestResinAndCard {
         assertEquals(0,player.getHandSize());
         assertEquals(0, (int) player.getResources().get(Resource.RESIN));
 
-        resinAndCard.visit(player.nextAvailableWorker(), game);
+        resinAndCard.visit(player, game);
         assertEquals(1,player.getHandSize());
         assertEquals(1,(int) player.getResources().get(Resource.RESIN));
 
-        resinAndCard.visit(player.nextAvailableWorker(), game);
+        resinAndCard.visit(player, game);
         assertEquals(2,player.getHandSize());
         assertEquals(2,(int) player.getResources().get(Resource.RESIN));
     }

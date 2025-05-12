@@ -10,7 +10,7 @@ import Everdell.Resource;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class School extends Construction implements Prosperity {
+public class School extends ProsperityConstruction {
     public School() {
         super("School", "1 point for each common critter in your city", true, 2);
         TreeMap<Resource, Integer> resources = getCosts();

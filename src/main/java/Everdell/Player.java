@@ -28,6 +28,7 @@ public class Player {
     private final ArrayList<Worker> workers;
     private Season season;
 
+    //constructor
     public Player (String name){
         pointTokens = 0;
         resources = new TreeMap<>();
@@ -45,8 +46,64 @@ public class Player {
         season = Season.WINTER;
         playedNonBoardCards = new ArrayList<>();
     }
+
+    //getters and setters
     public String getName() {
         return name;
+    }
+
+    public TreeMap<Resource, Integer> getResources(){
+        return resources;
+    }
+
+    public int getPointTokens(){
+        return pointTokens;
+    }
+
+    public Season getSeason(){
+        return season;
+    }
+
+    public void setSeason(Season season){
+        this.season = season;
+    }
+
+    public ArrayList<Worker> getWorkers(){
+        return workers;
+    }
+
+    public ArrayList<Card> getBoard(){
+        return board;
+    }
+
+    public ArrayList<Card> getPlayedNonBoardCards(){
+        return playedNonBoardCards;
+    }
+
+    public ArrayList<Event> getCompletedEvents() {return completedEvents;}
+
+    public int getHandSize(){
+        return hand.size();
+    }
+
+    public ArrayList<Card> getHand(){ return hand; }
+
+    public ArrayList<Card> getProductions(){
+        ArrayList<Card> productions = new ArrayList<>();
+        for (Card card : board) {
+            if (card instanceof Production) productions.add(card);
+        }
+        return productions;
+    }
+
+    //workers
+
+    public void retrieveWorkers(){
+        for (Worker worker : workers) {
+            if(worker.canBeReturned()) {
+                worker.returnWorker();
+            }
+        }
     }
 
     public boolean hasAvailableWorker (){
@@ -57,43 +114,11 @@ public class Player {
         }
         return false;
     }
-    public void gainResource (Resource resource, int amount){
-        resources.put(resource, resources.get(resource) + amount);
-    }
-    public TreeMap<Resource, Integer> getResources(){
-        return resources;
-    }
-    public void gainPointTokens (int amount){
-        pointTokens += amount;
-    }
-    public int getPointTokens(){
-        return pointTokens;
-    }
-    public Season getSeason(){
-        return season;
-    }
-    public void setSeason(Season season){
-        this.season = season;
-    }
-    public void retrieveWorkers(){
-        for (Worker worker : workers) {
-            if(worker.canBeReturned()) {
-                worker.returnWorker();
-            }
-        }
-    }
+
     public void gainWorker (){
         workers.add(new Worker(this));
     }
-    public ArrayList<Worker> getWorkers(){
-        return workers;
-    }
 
-    public ArrayList<Event> getCompletedEvents() {return completedEvents;}
-    public void addEvent(Event event){completedEvents.add(event);}
-    public int getHandSize(){
-        return hand.size();
-    }
     public Worker nextAvailableWorker (){
         for (Worker worker : workers) {
             if (worker.isAvailable()) {
@@ -102,9 +127,42 @@ public class Player {
         }
         return null;
     }
+
+    //resources
+    public void gainResource (Resource resource, int amount){
+        resources.put(resource, resources.get(resource) + amount);
+    }
+    public void gainPointTokens (int amount){
+        pointTokens += amount;
+    }
+
+    public void gainResources (TreeMap<Resource, Integer> resources){
+        for (Resource resource : resources.keySet()) {
+            this.resources.put(resource, this.resources.get(resource) + resources.get(resource));
+        }
+    }
+
+    public void spendResources (TreeMap<Resource, Integer> resources){
+        for (Resource resource : resources.keySet()) this.resources.put(resource, this.resources.get(resource) - resources.get(resource));
+    }
+
+    public boolean hasEnoughResources (TreeMap<Resource, Integer> resources, int discount){
+        for (Resource resource : resources.keySet()) {
+            int difference = this.resources.get(resource) - resources.get(resource);
+            if (difference < 0) discount += difference;
+        }
+        return discount >= 0;
+    }
+
+    //Events
+    public void addEvent(Event event){completedEvents.add(event);}
+
+    //Cards
+
     public void addCard(Card card){
         hand.add(card);
     }
+
     public int countFarms (){
         int count = 0;
         for (Card card : board) {
@@ -114,18 +172,7 @@ public class Player {
         }
         return count;
     }
-    public void addCardToBoard (Card card){
-        board.add(card);
-    }
-    public ArrayList<Card> getBoard(){
-        return board;
-    }
-    public ArrayList<Card> getPlayedNonBoardCards(){
-        return playedNonBoardCards;
-    }
-    public void addNonBoardCard (Card card){
-        playedNonBoardCards.add(card);
-    }
+
     public boolean isCardOnBoard (Card card){
         for (Card playedCard : board) {
             if (card.getName().equals(playedCard.getName())) {
@@ -134,37 +181,6 @@ public class Player {
         }
         return false;
     }
-    public void playCritter (Critter critter, Game game){
-        Shopkeeper shopkeeper = new Shopkeeper();
-        boolean hasShopkeeper = isCardOnBoard(shopkeeper);
-        // Activate ability if tan traveller or production
-        if (critter instanceof AbilityCard)  ((AbilityCard) critter).action(this, game);
-        //Add Critter to correct list
-        if (critter instanceof Wanderer)  addNonBoardCard((Wanderer) critter);
-        else addCardToBoard( critter);
-        //activate shopkeeper
-        if(hasShopkeeper) shopkeeper.ability(this, game);
-    }
-    public void playConstruction (Construction construction, Game game){
-        Courthouse courthouse = new Courthouse();
-        boolean hasCourthouse = isCardOnBoard(courthouse);
-        //Activate ability for ability cards
-        if(construction instanceof AbilityCard)  ((AbilityCard) construction).action(this, game);
-        // add card to board
-        addCardToBoard((Card) construction);
-        //activate courthouse
-        if(hasCourthouse) courthouse.ability(this, game);
-    }
-    public void playCard (Card card, Game game){
-        Historian historian = new Historian();
-        boolean hasHistorian = isCardOnBoard(historian);
-        if(card instanceof Critter) playCritter((Critter) card, game);
-        else if(card instanceof Construction) playConstruction((Construction) card, game);
-        if(hasHistorian) historian.ability(this, game);
-    }
-    public void spendResources (TreeMap<Resource, Integer> resources){
-        for (Resource resource : resources.keySet()) this.resources.put(resource, this.resources.get(resource) - resources.get(resource));
-    }
 
     public boolean canOccupyBoard(Critter critter){
         for (Card card : board) {
@@ -172,23 +188,38 @@ public class Player {
         }
         return false;
     }
-    public boolean hasEnoughResources (TreeMap<Resource, Integer> resources, int discount){
-        for (Resource resource : resources.keySet()) {
-            int difference = this.resources.get(resource) - resources.get(resource);
-            if (difference < 0) discount += difference;
-        }
-        return discount >= 0;
+
+    public void removeCardFromHand (Card card){hand.remove(card);}
+
+    //Card playing
+
+    public void addCardToBoard (Card card){
+        board.add(card);
     }
-    public ArrayList<Card> getProductions(){
-        ArrayList<Card> productions = new ArrayList<>();
-        for (Card card : board) {
-            if (card instanceof Production) productions.add(card);
-        }
-        return productions;
+
+    public void addNonBoardCard (Card card){
+        playedNonBoardCards.add(card);
     }
-    public void gainResources (TreeMap<Resource, Integer> resources){
-        for (Resource resource : resources.keySet()) {
-            this.resources.put(resource, this.resources.get(resource) + resources.get(resource));
-        }
+
+    public void playCritter (Critter critter, Game game){
+        Shopkeeper shopkeeper = new Shopkeeper();
+        boolean hasShopkeeper = isCardOnBoard(shopkeeper);
+        critter.playCard(this, game);
+        if(hasShopkeeper) shopkeeper.ability(this, game);
+    }
+
+    public void playConstruction (Construction construction, Game game){
+        Courthouse courthouse = new Courthouse();
+        boolean hasCourthouse = isCardOnBoard(courthouse);
+        construction.playCard(this, game);
+        if(hasCourthouse) courthouse.ability(this, game);
+    }
+
+    public void playCard (Card card, Game game){
+        Historian historian = new Historian();
+        boolean hasHistorian = isCardOnBoard(historian);
+        if(card instanceof Critter) playCritter((Critter) card, game);
+        else if(card instanceof Construction) playConstruction((Construction) card, game);
+        if(hasHistorian) historian.ability(this, game);
     }
 }
