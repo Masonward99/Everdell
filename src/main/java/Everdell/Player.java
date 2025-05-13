@@ -191,6 +191,8 @@ public class Player {
 
     public void removeCardFromHand (Card card){hand.remove(card);}
 
+    public void removeCardFromBoard (Card card){board.remove(card);}
+
     //Card playing
 
     public void addCardToBoard (Card card){

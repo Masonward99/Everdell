@@ -167,4 +167,9 @@ public class Game {
             discard.add(card);
         }
     }
+
+    public void discardCardFromBoard(Card card, Player player) {
+        discard.add(card);
+        player.removeCardFromBoard(card);
+    }
 }
