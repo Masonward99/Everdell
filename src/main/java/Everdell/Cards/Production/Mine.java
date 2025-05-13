@@ -1,6 +1,7 @@
 package Everdell.Cards.Production;
 
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -19,5 +20,8 @@ public class Mine extends ProdutionConstruction {
         player.gainResource(Resource.STONES, 1);
     }
 
-
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof MinerMole && !isOccupied();
+    }
 }

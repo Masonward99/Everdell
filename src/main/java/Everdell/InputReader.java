@@ -65,6 +65,15 @@ public class InputReader {
         int index = getIntInRange(players.size());
         return players.get(index);
     }
-
+    public CardPile getCardPileFromUser (ArrayList<CardPile> cardPiles) {
+        if (cardPiles.isEmpty()) return null;
+        if (cardPiles.size() == 1) return cardPiles.getFirst();
+        System.out.println("Select a card pile:");
+        for (int j = 0 ; j < cardPiles.size() ;j++) {
+            System.out.println(j  + ": " +  cardPiles.get(j).toString() );
+        }
+        int index = getIntInRange(cardPiles.size());
+        return cardPiles.get(index);
+    }
 
 }

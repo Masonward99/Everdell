@@ -6,4 +6,5 @@ import Everdell.Player;
 
 public  interface Production extends AbilityCard {
       void action(Player player, Game game);
+      Player getPlayer();
 }

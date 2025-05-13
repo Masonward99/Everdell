@@ -12,7 +12,9 @@ public class HusbandAndWife extends Critter implements Prosperity, Production {
 
     @Override
     public void action(Player player, Game game) {
-        game.gainAnyResource(1, player);
+        if (getPlayer().countFarms() > 0){
+            game.gainAnyResource(1, player);
+        }
     }
 
     @Override

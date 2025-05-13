@@ -145,10 +145,25 @@ public class Game {
 
     }
 
-    public ArrayList<Card> revealCards(int numCards) {
+    public ArrayList<Card> revealCardsFromDeck(int numCards) {
         ArrayList<Card> cards = new ArrayList<>();
         for (int i = 0; i < numCards; i++) cards.add(drawCard());
         return cards;
+    }
+
+    public ArrayList<Card> revealCardsFromDiscard(int numCards) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (int i = 0; i < numCards; i++) {
+            if (discard.isEmpty()) break;
+            cards.add(discard.removeLast());
+        };
+        return cards;
+    }
+
+    public void refillHand(Player player) {
+        while (player.getHandSize() < Player.HAND_LIMIT) {
+            player.addCard(drawCard());
+        }
     }
 
     //locations

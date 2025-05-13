@@ -16,7 +16,7 @@ public class GeneralStore extends ProdutionConstruction {
         costs.put(Resource.STONES, 1);
     }
     public void action (Player player, Game game) {
-        boolean hasFarm = player.countFarms() > 0;
+        boolean hasFarm = getPlayer().countFarms() > 0;
         player.gainResource(Resource.BERRIES, hasFarm? 2: 1);
     }
 

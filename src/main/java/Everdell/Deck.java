@@ -4,10 +4,7 @@ import Everdell.Cards.BlueGovernance.Historian;
 import Everdell.Cards.BlueGovernance.Innkeeper;
 import Everdell.Cards.BlueGovernance.Shopkeeper;
 import Everdell.Cards.Card;
-import Everdell.Cards.Destination.Lookout;
-import Everdell.Cards.Destination.Monastery;
-import Everdell.Cards.Destination.Queen;
-import Everdell.Cards.Destination.University;
+import Everdell.Cards.Destination.*;
 import Everdell.Cards.Production.*;
 import Everdell.Cards.Prosperity.*;
 import Everdell.Cards.TanTraveller.*;
@@ -57,6 +54,8 @@ public class Deck {
             deck.add(new TwigBarge());
             deck.add(new ResinRefinery());
             deck.add(new Ruins());
+            deck.add(new MinerMole());
+            deck.add(new PostOffice());
         }
         for (int i = 0; i < 2; i++) {
             deck.add(new EverTree());
@@ -74,6 +73,7 @@ public class Deck {
             deck.add(new University());
             deck.add(new Monk());
             deck.add(new Monastery());
+            deck.add(new Cemetery());
         }
         shuffle();
     }

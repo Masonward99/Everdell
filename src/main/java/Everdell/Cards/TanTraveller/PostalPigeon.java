@@ -16,7 +16,7 @@ public class PostalPigeon extends TravellerCritter {
     @Override
     public void action(Player player, Game game) {
         System.out.println("Select card to play");
-        ArrayList<Card> cards = game.revealCards(2);
+        ArrayList<Card> cards = game.revealCardsFromDeck(2);
         cards.add(null);
         Card card = game.getInput().getCardFromUser(cards);
         while (card != null && !(card.isPlayable(player) && card.getPoints() <= 3) ) {

@@ -3,7 +3,6 @@ package org.example;
 
 import Everdell.Cards.Destination.Monastery;
 import Everdell.Cards.Production.Monk;
-import Everdell.Cards.Production.Teacher;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;

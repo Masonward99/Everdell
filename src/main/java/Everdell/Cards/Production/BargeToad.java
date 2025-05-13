@@ -12,7 +12,7 @@ public class BargeToad extends ProductionCritter {
 
     @Override
     public void action(Player player, Game game) {
-        int numFarms = player.countFarms();
+        int numFarms = getPlayer().countFarms();
         player.gainResource(Resource.TWIGS, numFarms * 2);
     }
 

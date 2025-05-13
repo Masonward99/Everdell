@@ -17,7 +17,7 @@ public class ChipSweep extends ProductionCritter {
 
     @Override
     public void action(Player player, Game game) {
-        ArrayList<Card> productions = player.getProductions();
+        ArrayList<Card> productions = getPlayer().getProductions();
         Iterator<Card> iterator = productions.iterator();
         while (iterator.hasNext()) {
             Card production = iterator.next();

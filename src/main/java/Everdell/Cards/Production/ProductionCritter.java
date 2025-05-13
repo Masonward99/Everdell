@@ -7,6 +7,7 @@ import Everdell.Player;
 import java.io.Serializable;
 
 public abstract class ProductionCritter extends Critter implements Production {
+    private Player player;
     public ProductionCritter(String name, String ability, boolean isUnique, int points) {
         super(name, ability, isUnique, points);
     }
@@ -15,5 +16,11 @@ public abstract class ProductionCritter extends Critter implements Production {
     public void playCard(Player player, Game game) {
         super.playCard(player, game);
         this.action(player, game);
+        this.player = player;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 }
