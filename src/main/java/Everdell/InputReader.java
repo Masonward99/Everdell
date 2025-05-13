@@ -76,4 +76,17 @@ public class InputReader {
         return cardPiles.get(index);
     }
 
+    /**
+     * Ask a yes or no question to a user. If they answer yes return true
+     * @return true if user answers yes, false otherwise
+     */
+    public boolean getYesOrNo () {
+        char c = scanner.next().charAt(0);
+        while (c != 'y' && c != 'Y' && c != 'n' && c != 'N') {
+           System.out.println("Enter Y or N: ");
+           c = scanner.next().charAt(0);
+        }
+        return (c == 'y' || c == 'Y');
+    }
+
 }

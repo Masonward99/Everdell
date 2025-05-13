@@ -1,6 +1,6 @@
 package Everdell.Cards.BlueGovernance;
 
-import Everdell.Cards.Construction;
+
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;

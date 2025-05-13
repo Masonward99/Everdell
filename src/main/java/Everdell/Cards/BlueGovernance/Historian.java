@@ -1,6 +1,6 @@
 package Everdell.Cards.BlueGovernance;
 
-import Everdell.Cards.Critter;
+
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;

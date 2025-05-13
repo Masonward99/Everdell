@@ -1,6 +1,7 @@
 package Everdell;
 
 import Everdell.Cards.AbilityCard;
+import Everdell.Cards.BlueGovernance.ClockTower;
 import Everdell.Cards.BlueGovernance.Courthouse;
 import Everdell.Cards.BlueGovernance.Historian;
 import Everdell.Cards.BlueGovernance.Shopkeeper;
@@ -27,6 +28,7 @@ public class Player {
     public static final int HAND_LIMIT = 8;
     private final ArrayList<Worker> workers;
     private Season season;
+    private boolean hasFinished;
 
     //constructor
     public Player (String name){
@@ -45,6 +47,7 @@ public class Player {
         workers.add(new Worker(this));
         season = Season.WINTER;
         playedNonBoardCards = new ArrayList<>();
+        hasFinished = false;
     }
 
     //getters and setters
@@ -95,6 +98,8 @@ public class Player {
         }
         return productions;
     }
+
+    public boolean hasFinished(){return hasFinished;}
 
     //workers
 
@@ -236,5 +241,48 @@ public class Player {
         if(card instanceof Critter) playCritter((Critter) card, game);
         else if(card instanceof Construction) playConstruction((Construction) card, game);
         if(hasHistorian) historian.ability(this, game);
+    }
+    public void prepareForSeason (Game game){
+        if(isCardOnBoard(new ClockTower()) && season != Season.SUMMER) {
+            ClockTower clockTower = ((ClockTower) getCardOnBoard(new ClockTower()));
+            clockTower.ability(this, game);
+        }
+        retrieveWorkers();
+        switch (season){
+            case WINTER -> {
+                gainWorker();
+                activateProductions(game);
+                setSeason(Season.WINTER);
+            }
+            case SPRING -> {
+                gainWorker();
+                game.drawFromMeadow(this);
+                game.drawFromMeadow(this);
+                game.refillMeadow();
+                setSeason(Season.SPRING);
+            }
+            case SUMMER -> {
+                gainWorker();
+                gainWorker();
+                activateProductions(game);
+                setSeason(Season.AUTUMN);
+            }
+            case AUTUMN -> {
+                //when finished no cards can be added to your board. Game ends when all players have finished.
+                hasFinished = true;
+            }
+        }
+
+    }
+    private void activateProductions (Game game){
+        for (Card card : board) {
+            if (card instanceof Production) ((Production) card).action(this, game);
+        }
+    }
+    private Card getCardOnBoard (Card card){
+        for (Card playedCard : board) {
+            if (playedCard.getName().equals(card.getName())) return playedCard;
+        }
+        return null;
     }
 }
