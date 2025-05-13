@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 public abstract class DestinationConstruction extends Construction implements Destination {
     private Player player;
-    private ArrayList<Worker> workers;
+    private final ArrayList<Worker> workers;
 
     public DestinationConstruction(String name, String ability, boolean isUnique, int points) {
         super(name, ability, isUnique, points);
+        workers = new ArrayList<>();
     }
 
     public Player getPlayer() {

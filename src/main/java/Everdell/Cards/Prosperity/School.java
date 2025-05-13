@@ -4,6 +4,7 @@ import Everdell.Cards.Card;
 import Everdell.Cards.Construction;
 import Everdell.Cards.Critter;
 import Everdell.Cards.Production.HusbandAndWife;
+import Everdell.Cards.Production.Teacher;
 import Everdell.Player;
 import Everdell.Resource;
 
@@ -29,5 +30,10 @@ public class School extends ProsperityConstruction {
             else if (card instanceof Critter && !card.isUnique()) bonus += 1;
         }
         return bonus;
+    }
+
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof Teacher && !isOccupied();
     }
 }

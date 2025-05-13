@@ -132,6 +132,7 @@ public class Player {
     public void gainResource (Resource resource, int amount){
         resources.put(resource, resources.get(resource) + amount);
     }
+
     public void gainPointTokens (int amount){
         pointTokens += amount;
     }
@@ -152,6 +153,18 @@ public class Player {
             if (difference < 0) discount += difference;
         }
         return discount >= 0;
+    }
+
+    public int totalResources (){
+        int count = 0;
+        for (Resource resource : resources.keySet()) {count += resources.get(resource);}
+        return count;
+    }
+
+    public ArrayList<Resource> getNonZeroResources(){
+        ArrayList<Resource> decidableResources = new ArrayList<>();
+        for (Resource resource : resources.keySet()) {if (resources.get(resource) >0) decidableResources.add(resource);}
+        return decidableResources;
     }
 
     //Events

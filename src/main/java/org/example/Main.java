@@ -1,32 +1,29 @@
 package org.example;
 
-import Everdell.Cards.Card;
-import Everdell.Cards.Destination.Queen;
-import Everdell.Cards.Production.Farm;
-import Everdell.Cards.Production.ResinRefinery;
-import Everdell.Cards.Prosperity.Castle;
-import Everdell.Cards.TanTraveller.PostalPigeon;
-import Everdell.Game;
-import Everdell.InputReader;
-import Everdell.Player;
 
-import java.util.ArrayList;
+import Everdell.Cards.Destination.Monastery;
+import Everdell.Cards.Production.Monk;
+import Everdell.Cards.Production.Teacher;
+import Everdell.Game;
+import Everdell.Player;
+import Everdell.Resource;
 
 public class Main {
 
     public static void main(String[] args) {
-        Game game = new Game(0);
-        Player player = new Player("Steve");
-        Queen queen = new Queen();
-        player.addCard(queen);
-        player.addCardToBoard(queen);
-        player.addCard(new Castle());
-        player.addCard(new ResinRefinery());
-        queen.visit(player, game);
-
-        System.out.println(player.getBoard());
-        System.out.println(game.getDiscard());
-        System.out.println(player.getResources());
+        Game game = new Game(2);
+        Player player1 = game.getPlayers()[0];
+        Player player2 = game.getPlayers()[1];
+        player1.gainResource(Resource.STONES, 5);
+        Monastery monastery = new Monastery();
+        monastery.playCard(player1, game);
+        game.visitLocation(player1, monastery);
+        System.out.println(monastery.canVisit(player1));
+        player1.addCardToBoard(new Monk());
+        System.out.println(monastery.canVisit(player1));
+        System.out.println(player1.getPointTokens());
+        System.out.println(player2.getResources());
+        System.out.println(player1.getResources());
     }
 
 }

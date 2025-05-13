@@ -52,16 +52,19 @@ public class InputReader {
         int index = getIntInRange(locations.size());
         return locations.get(index);
     }
-    public Card getCardOrNull(ArrayList<Card> cards) {
-        if (cards.isEmpty()) return null;
-        if(cards.size() == 1) return cards.getFirst();
-        cards.add(null);
-        System.out.println("Select a card:");
-        for (int j = 0 ; j < cards.size() ;j++) {
-            System.out.println(j  + ": " +  cards.get(j).toString() );
-        }
-        int index = getIntInRange(cards.size());
-        return cards.get(index);
+    public String getPlayerName (){
+        return scanner.next();
     }
+    public Player getPlayerFromUser (ArrayList<Player> players) {
+        if (players.isEmpty()) return null;
+        if (players.size() == 1) return players.get(0);
+        System.out.println("Select a player:");
+        for (int j = 0 ; j < players.size() ;j++) {
+            System.out.println(j  + ": " + players.get(j).toString() );
+        }
+        int index = getIntInRange(players.size());
+        return players.get(index);
+    }
+
 
 }

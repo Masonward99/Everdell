@@ -1,6 +1,7 @@
 package Everdell;
 
 import Everdell.Cards.Card;
+import Everdell.Cards.Destination.WorkerNotRemovableLocation;
 import Everdell.Events.BasicEvents.*;
 import Everdell.Events.Event;
 import Everdell.Locations.BasicLocation.*;
@@ -38,6 +39,7 @@ public class Game {
         meadow = new Meadow();
         refillMeadow();
         haven = new Haven();
+        setUpPlayers();
 
     }
     // getters and setters
@@ -50,6 +52,8 @@ public class Game {
     public ForestLocation[] getForestLocations() {return forestLocations;}
 
     public ArrayList<Card> getDiscard() {return discard;}
+
+    public Player[] getPlayers() {return players;}
 
     //helpers
     private void refillDeck (){
@@ -91,6 +95,14 @@ public class Game {
         basicEvents.add(new GrandTour());
         basicEvents.add(new HarvestFestival());
         basicEvents.add(new CartographersExpedition());
+    }
+
+    private void setUpPlayers(){
+        for(int i = 0; i < players.length; i++){
+            System.out.println("Player " + (i + 1) + " enter your name.");
+            String name = input.getPlayerName();
+            players[i] = new Player(name);
+        }
     }
 
     //Methods related to meadow
@@ -145,6 +157,7 @@ public class Game {
         location.visit(player, this);
         worker.placeWorker(location);
         location.addWorker(worker);
+        if (location instanceof WorkerNotRemovableLocation) worker.setCantReturn();
     }
 
     //resources

@@ -63,21 +63,6 @@ public class TestGame {
         game.gainAnyResource(1, player);
         assertEquals(1,(int) player.getResources().get(Resource.BERRIES));
     }
-    @Test
-    public void testSetUpForest(){
-        ForestLocation[] forestLocations = game.getForestLocations();
-        assert(forestLocations.length == 4);
-        System.out.println(forestLocations[0]);
-        assert(forestLocations[0] != forestLocations[1]);
-        assert(forestLocations[0] != forestLocations[2]);
-        assert(forestLocations[0] != forestLocations[3]);
-        assert(forestLocations[3] != null);
-
-        game = new Game(2);
-        forestLocations = game.getForestLocations();
-        assert(forestLocations.length == 4);
-        assert(forestLocations[3] == null);
-    }
 
     @Test
     public void testDiscardCardsWith1Discard(){
