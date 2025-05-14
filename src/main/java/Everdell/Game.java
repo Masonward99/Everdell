@@ -10,6 +10,8 @@ import Everdell.Locations.Haven;
 import Everdell.Locations.Location;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Game {
@@ -166,6 +168,11 @@ public class Game {
         }
     }
 
+    //Card Playing
+    public void playCard(Card card) {
+        
+    }
+
     //locations
     public void visitLocation (Player player, Location location) {
         Worker worker = player.nextAvailableWorker();
@@ -173,6 +180,24 @@ public class Game {
         worker.placeWorker(location);
         location.addWorker(worker);
         if (location instanceof WorkerNotRemovableLocation) worker.setCantReturn();
+    }
+
+    public ArrayList<Location> getVisitableLocations(Player player) {
+        ArrayList<Location> visitableLocations = new ArrayList<>();
+        visitableLocations.addAll(Arrays.asList(basicLocations));
+        visitableLocations.addAll(Arrays.asList(forestLocations));
+        for (Player player : players) {
+            ArrayList<Card> cards = player.getHand();
+            for (Card card : cards) {
+                if (card instanceof Location) visitableLocations.add((Location) card);
+            }
+        }
+        Iterator<Location> iterator = visitableLocations.iterator();
+        while (iterator.hasNext()) {
+            Location location = iterator.next();
+            if (!location.canVisit(player)) iterator.remove();
+        }
+        return visitableLocations;
     }
 
     //resources

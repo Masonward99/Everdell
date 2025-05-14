@@ -5,8 +5,8 @@ import Everdell.Game;
 import Everdell.Player;
 
 public abstract class TravellerCritter extends Critter implements TanTraveller{
-    public TravellerCritter(String name, String ability, boolean isUnqiue, int points) {
-        super(name, ability, isUnqiue, points);
+    public TravellerCritter(String name, String ability, boolean isUnique, int points) {
+        super(name, ability, isUnique, points);
     }
 
     @Override

@@ -89,4 +89,15 @@ public class InputReader {
         return (c == 'y' || c == 'Y');
     }
 
+    public Worker getWorkerFromUser (ArrayList<Worker> workers) {
+        if (workers.isEmpty()) return null;
+        if (workers.size() == 1) return workers.getFirst();
+        System.out.println("Select a worker:");
+        for (int j = 0 ; j < workers.size() ;j++) {
+            System.out.println(j  + ": " + workers.get(j).getLocation().toString() );
+        }
+        int index = getIntInRange(workers.size());
+        return workers.get(index);
+    }
+
 }

@@ -74,6 +74,8 @@ public class Deck {
             deck.add(new Monk());
             deck.add(new Monastery());
             deck.add(new Cemetery());
+            deck.add(new Shepherd());
+            deck.add(new Fool());
         }
         shuffle();
     }

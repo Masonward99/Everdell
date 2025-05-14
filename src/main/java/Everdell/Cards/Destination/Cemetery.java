@@ -35,7 +35,7 @@ public class Cemetery extends DestinationConstruction implements WorkerNotRemova
         }
         cards.add(null);
         Card card = game.getInput().getCardFromUser(cards);
-        while (card != null && card.isPlayable(player)) {
+        while (card != null && card.isPlayable(player, game)) {
             System.out.println(card + " is not playable. Select a different card.");
             card = game.getInput().getCardFromUser(cards);
         }

@@ -19,7 +19,7 @@ public class PostalPigeon extends TravellerCritter {
         ArrayList<Card> cards = game.revealCardsFromDeck(2);
         cards.add(null);
         Card card = game.getInput().getCardFromUser(cards);
-        while (card != null && !(card.isPlayable(player) && card.getPoints() <= 3) ) {
+        while (card != null && !(card.isPlayable(player, game) && card.getPoints() <= 3) ) {
             System.out.println(card + " is not playable select another card");
             card = game.getInput().getCardFromUser(cards);
         }

@@ -23,7 +23,7 @@ public class Wanderer extends Critter implements TanTraveller {
     }
 
     @Override
-    public boolean isPlayable(Player player) {
+    public boolean isPlayable(Player player, Game game ) {
         return true;
     }
 }

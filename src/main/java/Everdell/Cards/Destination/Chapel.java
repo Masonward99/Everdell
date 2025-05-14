@@ -1,6 +1,8 @@
 package Everdell.Cards.Destination;
 
 import Everdell.Cards.Construction;
+import Everdell.Cards.Critter;
+import Everdell.Cards.TanTraveller.Shepherd;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -29,5 +31,10 @@ public class Chapel extends DestinationConstruction {
     @Override
     public int getPoints() {
         return super.getPoints() + pointTokens;
+    }
+
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof Shepherd && !isOccupied();
     }
 }

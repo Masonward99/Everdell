@@ -19,8 +19,8 @@ public class Queen extends DestinationCritter{
         cards.addAll(player.getHand());
         cards.addAll(game.getMeadow().getCards());
         Card card = game.getInput().getCardFromUser(cards);
-        while(!(card.isPlayable(player) && card.getPoints() <= 3) ){
-            if (!card.isPlayable(player)) {
+        while(!(card.isPlayable(player, game) && card.getPoints() <= 3) ){
+            if (!card.isPlayable(player, game)) {
                 System.out.println(card + " is not playable. Select a different card.");
             }
             else if (card.getPoints() > 3) {

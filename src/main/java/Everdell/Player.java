@@ -1,6 +1,5 @@
 package Everdell;
 
-import Everdell.Cards.AbilityCard;
 import Everdell.Cards.BlueGovernance.ClockTower;
 import Everdell.Cards.BlueGovernance.Courthouse;
 import Everdell.Cards.BlueGovernance.Historian;
@@ -10,7 +9,6 @@ import Everdell.Cards.Construction;
 import Everdell.Cards.Critter;
 import Everdell.Cards.Production.Farm;
 import Everdell.Cards.Production.Production;
-import Everdell.Cards.TanTraveller.Wanderer;
 import Everdell.Events.Event;
 
 
@@ -61,10 +59,6 @@ public class Player {
 
     public int getPointTokens(){
         return pointTokens;
-    }
-
-    public Season getSeason(){
-        return season;
     }
 
     public void setSeason(Season season){
@@ -131,6 +125,14 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public ArrayList<Worker> getRedeployableWorkers(){
+        ArrayList<Worker> redeployableWorkers = new ArrayList<>();
+        for (Worker worker : workers) {
+            if(!worker.isAvailable() && worker.canBeReturned()) redeployableWorkers.add(worker);
+        }
+        return redeployableWorkers;
     }
 
     //resources
@@ -242,6 +244,7 @@ public class Player {
         else if(card instanceof Construction) playConstruction((Construction) card, game);
         if(hasHistorian) historian.ability(this, game);
     }
+
     public void prepareForSeason (Game game){
         if(isCardOnBoard(new ClockTower()) && season != Season.SUMMER) {
             ClockTower clockTower = ((ClockTower) getCardOnBoard(new ClockTower()));
@@ -274,12 +277,14 @@ public class Player {
         }
 
     }
+
     private void activateProductions (Game game){
         for (Card card : board) {
             if (card instanceof Production) ((Production) card).action(this, game);
         }
     }
-    private Card getCardOnBoard (Card card){
+
+    public Card getCardOnBoard (Card card){
         for (Card playedCard : board) {
             if (playedCard.getName().equals(card.getName())) return playedCard;
         }

@@ -2,6 +2,8 @@ package Everdell.Cards.Production;
 
 
 
+import Everdell.Cards.Critter;
+import Everdell.Cards.TanTraveller.Fool;
 import Everdell.Game;
 import Everdell.Player;
 import Everdell.Resource;
@@ -23,5 +25,8 @@ public class Fairgrounds extends ProdutionConstruction {
         game.drawCards(2, player);
     }
 
-
+    @Override
+    public boolean canBeOccupiedBy(Critter critter) {
+        return critter instanceof Fool && !isOccupied();
     }
+}

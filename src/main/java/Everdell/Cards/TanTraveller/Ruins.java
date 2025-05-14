@@ -28,7 +28,7 @@ public class Ruins extends TanConstruction{
     }
 
     @Override
-    public boolean isPlayable(Player player) {
+    public boolean isPlayable(Player player, Game game) {
         //board size must be less than 15 and at least one construction on board
         if (player.getBoard().size() >= 15) return false;
         for (Card card : player.getBoard()){

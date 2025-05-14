@@ -48,7 +48,7 @@ public abstract class Card {
      * @param player the player playing the card
      * @return true if both of these constraints hold, false otherwise.
      */
-    public boolean isPlayable(Player player) {
+    public boolean isPlayable(Player player, Game game) {
         return (!isUnique || !player.isCardOnBoard(this)) && player.getBoard().size() < 15;
     }
 
