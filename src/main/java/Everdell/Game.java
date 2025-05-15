@@ -4,17 +4,20 @@ import Everdell.Cards.Card;
 import Everdell.Cards.Destination.WorkerNotRemovableLocation;
 import Everdell.Events.BasicEvents.*;
 import Everdell.Events.Event;
+import Everdell.Gui.Gui;
+import Everdell.Gui.SharedLocation;
 import Everdell.Locations.BasicLocation.*;
 import Everdell.Locations.ForestLocations.*;
 import Everdell.Locations.Haven;
 import Everdell.Locations.Location;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
+import javax.xml.transform.Source;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
 
-public class Game {
+public class Game extends MouseAdapter {
     private final Deck deck;
     private final Player[] players;
     private final ArrayList<Card> discard;
@@ -24,6 +27,8 @@ public class Game {
     private final InputReader input;
     private final Meadow meadow;
     private final Haven haven;
+    private Gui gui;
+    private int turn = 0;
 
     //constructors
     public Game(int numPlayers) {
@@ -42,6 +47,7 @@ public class Game {
         refillMeadow();
         haven = new Haven();
         setUpPlayers();
+        gui = new Gui(this);
 
     }
     // getters and setters
@@ -57,6 +63,10 @@ public class Game {
 
     public Player[] getPlayers() {return players;}
 
+    public Player getActivePlayer() {
+        return players[turn % players.length];
+    }
+
     //helpers
     private void refillDeck (){
         deck.addCards(discard);
@@ -68,7 +78,7 @@ public class Game {
         basicLocations[1] = new TwoTwigsAndCard();
         basicLocations[2] = new TwoResin();
         basicLocations[3] = new ResinAndCard();
-        basicLocations[4] = new TwoTwigsAndCard();
+        basicLocations[4] = new TwoCardsAndPoint();
         basicLocations[5] = new Stone();
         basicLocations[6] = new BerryAndCard();
         basicLocations[7] = new BerryAndCard();
@@ -179,15 +189,27 @@ public class Game {
         location.visit(player, this);
         worker.placeWorker(location);
         location.addWorker(worker);
+        System.out.println("visited" + location);
         if (location instanceof WorkerNotRemovableLocation) worker.setCantReturn();
+    }
+
+    public void activePlayerVisit(Location location) {
+        if (location.canVisit(getActivePlayer())){
+            visitLocation(getActivePlayer(), location);
+            System.out.println(getActivePlayer().getResources());
+            turn++;
+        }
+        else {
+            System.out.println(getActivePlayer());
+        }
     }
 
     public ArrayList<Location> getVisitableLocations(Player player) {
         ArrayList<Location> visitableLocations = new ArrayList<>();
         visitableLocations.addAll(Arrays.asList(basicLocations));
         visitableLocations.addAll(Arrays.asList(forestLocations));
-        for (Player player : players) {
-            ArrayList<Card> cards = player.getHand();
+        for (Player player1 : players) {
+            ArrayList<Card> cards = player1.getHand();
             for (Card card : cards) {
                 if (card instanceof Location) visitableLocations.add((Location) card);
             }
@@ -224,5 +246,26 @@ public class Game {
     public void discardCardFromBoard(Card card, Player player) {
         discard.add(card);
         player.removeCardFromBoard(card);
+    }
+
+    public void mouseClicked (MouseEvent e) {
+        Object source = e.getSource();
+        if (source instanceof SharedLocation) {
+            Location sourceLocation =  ((SharedLocation) source).getEverdellLocation();
+            activePlayerVisit(sourceLocation);
+            gui.getFrame().repaint();
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        Component source = (Component) e.getSource();
+        source.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        Component source = (Component) e.getSource();
+        source.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 }

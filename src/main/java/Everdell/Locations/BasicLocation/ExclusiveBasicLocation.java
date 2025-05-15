@@ -9,6 +9,7 @@ public abstract class ExclusiveBasicLocation extends BasicLocation {
 
     @Override
     public boolean canVisit(Player player) {
+        if (!player.hasAvailableWorker()) return false;
         return getWorkers().isEmpty();
     }
 }

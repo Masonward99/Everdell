@@ -1,6 +1,7 @@
 package Everdell.Locations.BasicLocation;
 
 import Everdell.Locations.Location;
+import Everdell.Player;
 import Everdell.Worker;
 
 import java.util.ArrayList;

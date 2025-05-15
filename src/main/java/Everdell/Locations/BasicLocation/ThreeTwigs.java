@@ -6,7 +6,7 @@ import Everdell.Resource;
 
 public class ThreeTwigs extends ExclusiveBasicLocation {
     public ThreeTwigs() {
-        super("ThreeTwigs");
+        super("Three Twigs");
     }
 
 
